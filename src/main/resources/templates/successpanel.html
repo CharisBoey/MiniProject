@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <style>
+        /* Apply a grid layout */
+        .panel-view {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        }
+
+        /* Style each panel item */
+        .panel-item {
+        border: 1px solid #ddd;
+        padding: 15px;
+        text-align: center;
+        width: 100%; /* Ensure each item takes the full width of the grid cell */
+        }
+      </style>
     <title>Document</title>
 </head>
 <body> 
@@ -21,7 +38,7 @@
         <div data-th-unless="${#lists.isEmpty(readingList)}">
             <h2>Reading List</h2>
             <hr>
-            <article data-th-each="book: ${readingList}">
+           <!--  <article data-th-each="book: ${readingList}">
                 <h4 data-th-text="*{book.title}"></h4>
                 <div>
                     <img data-th-src="*{book.thumbnail}" width="150px">
@@ -54,7 +71,45 @@
                 <p>
                     <strong>Comments:</strong> <span data-th-text="*{book.comments}"></span>
                 </p>
-            </article>
+            </article> -->
+            <div class="panel-view" th:each="book: ${readingList}">
+                <div class="panel-item">
+                
+                <h4 data-th-text="*{book.title}"></h4>
+                <div>
+                    <img data-th-src="*{book.thumbnail}" width="150px">
+                </div>
+
+                <p>
+                    <strong>Author(s):</strong> <span data-th-text="*{book.authors}"></span>
+                </p>
+
+                <p>
+                    <strong>Description:</strong> <span data-th-text="*{book.description}"></span>
+                </p>
+
+                <p>
+                    <strong>Category:</strong> <span data-th-text="*{book.category}"></span>
+                </p>
+
+                <p>
+                    <strong>Language:</strong> <span data-th-text="*{book.language}"></span>
+                </p>
+
+                <p>
+                    <strong>IBSN:</strong> <span data-th-text="*{book.isbn}"></span>
+                </p>
+
+                <p>
+                    <strong>Rating:</strong> <span data-th-text="*{book.rating}"></span>
+                </p>
+
+                <p>
+                    <strong>Comments:</strong> <span data-th-text="*{book.comments}"></span>
+                </p>
+                </div>
+            </div>
+
 
             
         </div>

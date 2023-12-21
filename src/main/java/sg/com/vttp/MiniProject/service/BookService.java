@@ -96,7 +96,8 @@ public class BookService {
         return response;
     } */
 
-     public ResponseEntity<String> getRelevantBookData(String input){
+    public ResponseEntity<String> getRelevantBookData(String input){
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+input);
         input = input.trim().replaceAll(" ","+");
 
         String url = UriComponentsBuilder
@@ -107,7 +108,7 @@ public class BookService {
                     .build(false)
                     .toUriString();
                     //.queryParam("maxResults", 40)
-        System.out.println("!@!@!@!@!@!@@@@@@@@@@@@" + url);
+        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" + url);
         RequestEntity<Void> request = RequestEntity.get(url).build();
 
         RestTemplate template = new RestTemplate();
@@ -134,9 +135,6 @@ public class BookService {
 
         for(JsonValue item: jsonArrayItemsInMain){
             JsonObject jsonObjectIndivBook = (JsonObject) item;
-            
-            //Get Book ID
-            String id = jsonObjectIndivBook.getString("id", "No Id Found");
 
             //Go into the Object
             JsonObject jsonObjectVolumeInfo = jsonObjectIndivBook.getJsonObject("volumeInfo");
@@ -160,7 +158,35 @@ public class BookService {
 
             //Get Book Description
             String description = jsonObjectVolumeInfo.getString("description", "No Description");
+            
+            //Get Book ISBN_10
+            JsonArray isbnVersions = jsonObjectVolumeInfo.getJsonArray("industryIdentifiers"); 
+            String isbn10 = "";
+            String isbn13 = "";
+            if (isbnVersions != null) {
+                for (JsonValue i :isbnVersions){
+                    JsonObject isbn = i.asJsonObject();
+                    String type = isbn.getString("type");
+                    if (type.equals("ISBN_10")){
+                        isbn10 = isbn.getString("identifier");
+                    } else if (type.equals("ISBN_13")){
+                        isbn13 = isbn.getString("identifier"); 
+                    }
+                }
+            } else {
+                isbn10 = null;
+                isbn13 = null;
+            }
+            String isbn = "";
+            if (isbn10 != null){
+                isbn = isbn10;
+            } else if (isbn13 !=null){
+                isbn = isbn13;
+            } else {
+                isbn = "No ISBN Found";
+            }
 
+            
             //Get Book Image
             JsonObject imageLinkObject = jsonObjectVolumeInfo.getJsonObject("imageLinks");
             String thumbnail="";
@@ -168,9 +194,9 @@ public class BookService {
             if (imageLinkObject != null) {
                 thumbnail = imageLinkObject.getString("thumbnail");
             } else {
-                thumbnail = "https://static.wikia.nocookie.net/spongebob/images/f/fc/Idiot_Box_029.png/revision/latest?cb=20200805145134";
+                thumbnail = "https://i.pinimg.com/originals/ed/d9/65/edd96521e8ca8975196b224a9c1cea6c.jpg";
             }
-            
+
             //Get Book Category List (Normal list is also used if you wanna display one way)
             JsonArray categories = jsonObjectVolumeInfo.getJsonArray("categories");
             List<String> categoryList = new LinkedList<>();
@@ -191,8 +217,7 @@ public class BookService {
             //Get Book Language
             String language = jsonObjectVolumeInfo.getString("language", "No Language Specified");
 
-
-            book = new Book(title, id, authorListOfNames, description, thumbnail, categoryListInString, language);
+            book = new Book(title, isbn, authorListOfNames, description, thumbnail, categoryListInString, language);
             bookList.add(book);
         }
         return bookList;

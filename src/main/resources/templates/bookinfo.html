@@ -20,9 +20,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="book: ${bookList}">
+                    <!-- <tr th:each="book: ${readingList}">
                         <td th:text="*{book.title}"></td>
-                        <td th:text="*{book.id}"></td>
+                        <td>
+                        <div>
+                            <img data-th-src="*{book.thumbnail}" width="150px">
+                        </div>
+                        </td>
+                    </tr> -->
+                    <tr>
+                        <td th:text="*{readingListBook.title}"></td>
+                        <td>
+                        <div>
+                            <img data-th-src="*{readingListBook.thumbnail}" width="150px">
+                        </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>

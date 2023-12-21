@@ -10,6 +10,7 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 // This is a configuration
@@ -35,8 +36,8 @@ public class AppConfig {
    @Value("${spring.redis.database}")
    private Integer redisDatabase;
 
-   @Bean("redis")
-   public RedisTemplate<String, String> createRedisConnection() {
+   @Bean("stringRedis")
+   public RedisTemplate<String, String> createStringRedisConnection() {
       // Create a redis configuration
       RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
       config.setHostName(redisHost);
@@ -64,6 +65,42 @@ public class AppConfig {
       template.setValueSerializer(new StringRedisSerializer());
       template.setHashKeySerializer(new StringRedisSerializer());
       template.setHashValueSerializer(new StringRedisSerializer());
+
+      return template;
+   }
+   @Bean("objectRedis")
+   //CHANGE TO STRING/OBJECT
+   public RedisTemplate<String, Object> createObjectRedisConnection() {
+      // Create a redis configuration
+      RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
+      config.setHostName(redisHost);
+      config.setPort(redisPort);
+      config.setDatabase(redisDatabase);
+      // Only set the username and passwrd if they are set
+      if (!"NOT_SET".equals(redisUser.trim())) {
+         config.setUsername(redisUser);
+         config.setPassword(redisPassword);
+      }
+
+      logger.log(Level.INFO, "Using Redis database %d".formatted(redisPort));
+      logger.log(Level.INFO
+         , "Using Redis password is set: %b".formatted(redisPassword != "NOT_SET"));
+
+      JedisClientConfiguration jedisClient = JedisClientConfiguration
+            .builder().build();
+      JedisConnectionFactory jedisFac = new JedisConnectionFactory(config, jedisClient);
+      jedisFac.afterPropertiesSet();
+
+      //CHANGE TO STRING/OBJECT
+      RedisTemplate<String, Object> template = new RedisTemplate<>();
+      template.setConnectionFactory(jedisFac);
+      
+      //if using <String, Object>, setKeySerializer & set HashKeySerializer is still stringredisserializer
+      template.setKeySerializer(new StringRedisSerializer());
+      template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+      template.setHashKeySerializer(new StringRedisSerializer());
+      template.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
+
 
       return template;
    }

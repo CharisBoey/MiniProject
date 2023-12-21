@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book {
+public class ReadingListBook {
     private String title;
     private String isbn;
     private String authors;
@@ -17,4 +17,6 @@ public class Book {
     private String thumbnail;
     private String category;
     private String language;
+    private String rating;
+    private String comments;
 }

@@ -26,4 +26,8 @@ public class BookController {
     //     model.addAttribute("bookList", bookList);
     //     return "bookinfo";
     // }
+    @GetMapping("/index")
+    public String displayBookInfo(){
+        return "index";
+    }
 }

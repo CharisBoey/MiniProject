@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel View</title>
+  <style>
+    /* Apply a grid layout */
+    .panel-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    /* Style each panel item */
+    .panel-item {
+      border: 1px solid #ddd;
+      padding: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="panel-view">
+  <div class="panel-item">Item 1</div>
+  <div class="panel-item">Item 2</div>
+  <div class="panel-item">Item 3</div>
+  <!-- Add more items as needed -->
+</div>
+
+</body>
+</html>
