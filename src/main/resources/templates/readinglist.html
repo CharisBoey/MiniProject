@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Serif+Display">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Garamond">
+    
+
     <title>Document</title>
 
     <style>
@@ -14,12 +16,11 @@
             font-family:'Lora', serif;
             margin: 0;
             padding: 0;
-            
         }
 
         .topborder {
-            background-color: #F1E4DC;
-            color: #492f21;
+            background-color: #D5E3EE;
+            color: #1A273E;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -28,10 +29,10 @@
         }
         
 
-        .brown-btn {
-            background-color: #492f21; 
-            border-color:#492f21;
-            color: #F1E4DC; 
+        .darkblue-btn {
+            background-color: #1A273E; 
+            border-color:#1A273E;
+            color: #FFF; 
             font-family: DM Serif Display, serif;
             display: flex;
             justify-content: center;
@@ -39,10 +40,20 @@
             text-align: center;
         }
 
-        .lightbrown-btn {
-            background-color: #dabeae;
-            border-color: #dabeae; 
-            color: #492f21;
+        .mediumblue-btn {
+            background-color: #576484;
+            border-color: #576484; 
+            color: #FFF;
+            font-family: DM Serif Display, serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .yellow-btn {
+            background-color: #F1A81A;
+            border-color: #F1A81A; 
+            color: #FFF;
             font-family: DM Serif Display, serif;
             display: flex;
             justify-content: center;
@@ -50,9 +61,12 @@
             text-align: center;
         }
         .btn:hover {
-            background-color: #b24800; 
-            border-color:#b24800;
-            color: #F1E4DC; 
+            /* background-color: #6E737E; 
+            border-color:#6E737E;
+            color: #FFF;   */
+            background-color: #1A273E; 
+            border-color:#1A273E;
+            color: #FFF;
         }
 
         .h1 {
@@ -61,7 +75,7 @@
         }
         .normalheaders{
             font-family: DM Serif Display, serif;
-            color: #492f21;
+            color: #1F273A;
         }
 
         .email {
@@ -122,7 +136,7 @@
                 <!-- PROBLEM VALIDATE THAT INPUT IS NOT NULL BEFORE SEARCHING IF NOT GOT ERROR -->
                 </div>
                 <div class="col-auto">
-                <button type="submit" class="btn btn-primary brown-btn" style="width: 220px;">Search</button>
+                <button type="submit" class="btn btn-primary darkblue-btn" style="width: 220px;">Search</button>
                 </div>
             </form>
             <br><br>
@@ -170,9 +184,9 @@
                         <td class="col-lg-3">
                             
                             <br>
-                            <a th:href="@{/Home/DisplayAndSearch}" class="btn btn-primary brown-btn" style="width: 230px; height: 50px;">Update</a>
+                            <a th:href="@{/Home/DisplayAndSearch}" class="btn btn-primary mediumblue-btn" style="width: 230px; height: 50px;">Update</a>
                             <br>
-                            <a th:href="@{/Home/DisplayAndSearch}" class="btn btn-primary lightbrown-btn" style="width: 230px;height: 50px">Delete</a>
+                            <a th:href="@{/Home/DisplayAndSearch}" class="btn btn-primary yellow-btn" style="width: 230px;height: 50px">Delete</a>
                             
                         </td>
                         <!-- <td>

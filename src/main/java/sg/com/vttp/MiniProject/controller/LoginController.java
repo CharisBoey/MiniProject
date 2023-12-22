@@ -120,7 +120,7 @@ public class LoginController {
         return "success";
     } */
 
-    @PostMapping("/DisplayAndSearch")
+    @PostMapping("/Search")
     public String displayResult(Model model, HttpSession sess){
 
         List<Book> bookList = (List<Book>) sess.getAttribute("bookList");
@@ -168,6 +168,6 @@ public class LoginController {
         bookRepo.saveChosenBook(email, readingListBook);
         model.addAttribute("readingListBook", readingListBook);
         // return "redirect:/Home/DisplayAndSearch"; 
-        return "redirect:/Home/DisplayAndSearch"; 
+        return "redirect:/Home/MyReadingList"; 
     }
 }

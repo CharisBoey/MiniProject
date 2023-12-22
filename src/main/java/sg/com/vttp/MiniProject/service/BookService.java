@@ -105,6 +105,7 @@ public class BookService {
                     .queryParam("q", input)
                     .queryParam("printType", "books")
                     .queryParam("key", BOOKS_APIKEY)
+                    .queryParam("maxResults", 40)
                     .build(false)
                     .toUriString();
                     //.queryParam("maxResults", 40)
