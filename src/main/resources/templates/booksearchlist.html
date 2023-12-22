@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Serif+Display">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Garamond">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family:'Lora', serif;
+            margin: 0;
+            padding: 0;
+            
+        }
+
+        .topborder {
+            background-color: #F1E4DC;
+            color: #492f21;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            
+        }
+        
+
+        .brown-btn {
+            background-color: #492f21; 
+            border-color:#492f21;
+            color: #F1E4DC; 
+            font-family: DM Serif Display, serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .lightbrown-btn {
+            background-color: #dabeae;
+            border-color: #dabeae; 
+            color: #492f21;
+            font-family: DM Serif Display, serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .add-btn {
+            text-align: right;
+            background-color: #492f21; 
+            border-color:#492f21;
+            color: #FFF; 
+            font-family: DM Serif Display, serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #b24800; 
+            border-color:#b24800;
+            color: #F1E4DC;
+        }
+
+        .h1 {
+            font-family: "Lobster", sans-serif;
+            margin: 0;
+        }
+        .normalheaders{
+            font-family: DM Serif Display, serif;
+            color: #492f21;
+        }
+
+        .email {
+            text-align: right;
+            font-weight: 100;
+            font-size: 20px;
+        }
+
+        
+
+        /* .table {
+        table-layout: fixed;
+        width: 100%;
+            
+        } */
+        /* .largercol {
+        width: 40%; 
+        }
+
+        .smallercol {
+        width: 20%;
+        } */
+
+        .tablecentered{
+            text-align: center;
+            /* padding: 10px 75px; */
+        }
+        /* Apply a grid layout */
+        .panel-view {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 20px;
+        }
+
+        /* Style each panel item */
+        .panel-item {
+        border: 1px solid #F1E4DC;
+        padding: 15px;
+        text-align: center;
+        background-color: #F1E4DC;
+        }
+
+        .panel-item h4 {
+        height: 60px; /* Set a fixed height */
+        
+        }
+
+        .panel-item img {
+        height: 225px; /* Set a fixed height for the images */
+        object-fit: contain; /* Maintain aspect ratio and cover the container */
+        background-color: #FFF;
+        
+        border: 10px solid #FFF; /* Add a border with the desired color */
+        border-radius: 5px;
+        }
+
+        /* .description{
+            text-align: justify;
+            overflow:auto;
+            text-overflow: ellipsis; 
+            height: 150px; 
+        } */
+
+        .description {
+            text-align: justify;
+            overflow: auto;
+            text-overflow: ellipsis;
+            height: 150px;
+            scrollbar-width: thin; /* For Firefox */
+            padding:10px
+        }
+
+        /* For WebKit browsers (Chrome, Safari) */
+        .description::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .description::-webkit-scrollbar-thumb {
+            background-color: #45160B; /* Color of the thumb */
+            border-radius: 5px; /* Rounded corners of the thumb */
+        }
+
+        .description::-webkit-scrollbar-track {
+            background-color: #EDE0DE; /* Color of the track */
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <div class="topborder">
+        <div class="h1">
+            <h1>InkIt.</h1>
+        </div>
+        <div class="email">
+            <i><span data-th-text="${email}"></span></i>
+        </div>
+    </div>
+    
+
+
+    <div class="container">
+        <br><br>
+
+        <div data-th-if="${#lists.isEmpty(bookList)}">
+            <br>
+			<h2>Empty Book List</h2>
+            <p>Please search for a book</p>
+		</div>
+        <div data-th-unless="${#lists.isEmpty(bookList)}">
+            
+            <form method="GET" data-th-action="@{/Home/Search}" class="row g-3 align-items-center">
+                <div class="normalheaders">
+                    <h2><label for="title" class="form-label">Search for books:</label></h2>
+                </div>
+                <div class="col-auto">
+                <input placeholder="Search by Book Title, Author or IBSN" type="text" name="input" id="input" class="form-control" size="125"/>
+                <!-- PROBLEM VALIDATE THAT INPUT IS NOT NULL BEFORE SEARCHING IF NOT GOT ERROR -->
+                </div>
+                <div class="col-auto">
+                <button type="submit" class="btn btn-primary brown-btn" style="width: 220px;">Search</button>
+                </div>
+            </form>
+            <br><br>
+            <hr>
+            <div class="normalheaders">
+                <h2>Book List</h2>
+            </div>
+            <div class="panel-view">
+                <div class="panel-item" data-th-each="book: ${bookList}">
+                    <a data-th-href="@{/Home/Save/{isbn}(isbn=${book.isbn})}" class="btn btn-primary add-btn">Add to Reading List</a>
+                    <br>
+                    <h4 data-th-text="*{book.title}"></h4>
+                    <div>
+                        <img data-th-src="*{book.thumbnail}" width="150px">
+                    </div>
+
+                    <p>
+                        <strong>Author(s):</strong> <span data-th-text="*{book.authors}"></span>
+                    </p>
+
+                    <p class="description">
+                        <strong>Description:</strong> <span data-th-text="*{book.description}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Category:</strong> <span data-th-text="*{book.category}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Language:</strong> <span data-th-text="*{book.language}"></span>
+                    </p>
+
+                    <p>
+                        <strong>IBSN:</strong> <span data-th-text="*{book.isbn}"></span>
+                    </p>
+                   
+                
+                
+                </div>
+                
+            </div>
+        </div><!-- 
+        <div data-th-unless="${#lists.isEmpty(bookList)}">
+            
+
+            
+        </div> -->
+    </div>
+    
+
+    <!-- <h4 data-th-text="*{book.title}"></h4>
+                    
+
+                    <p>
+                        <strong>Author(s):</strong> <span data-th-text="*{book.authors}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Description:</strong> <span data-th-text="*{book.description}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Category:</strong> <span data-th-text="*{book.category}"></span>
+                    </p>
+
+                    <p>
+                        <strong>Language:</strong> <span data-th-text="*{book.language}"></span>
+                    </p>
+
+                    <p>
+                        <strong>IBSN:</strong> <span data-th-text="*{book.isbn}"></span>
+                    </p>
+                   
+                
+                <td>
+                    <a data-th-href="@{/Home/Save/{isbn}(isbn=${book.isbn})}" class="btn btn-success">Add to Reading List</a>
+                </td> -->
+
+</body>
+</html>

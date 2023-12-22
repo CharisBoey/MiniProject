@@ -127,6 +127,7 @@ public class BookService {
         Book book = new Book();
         ResponseEntity<String> result = getRelevantBookData(input);
         String jsonString = result.getBody();
+        
 
         //read data
         JsonReader jsonReader = Json.createReader(new StringReader(jsonString));

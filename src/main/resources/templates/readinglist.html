@@ -11,26 +11,48 @@
 
     <style>
         body {
-            font-family: Garamond;
+            font-family:'Lora', serif;
             margin: 0;
             padding: 0;
             
         }
 
         .topborder {
-            background-color: #EDE0DE;
-            color: #45160B;
+            background-color: #F1E4DC;
+            color: #492f21;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 60px;
             
         }
+        
 
         .brown-btn {
-        background-color: #45160B; 
-        color: #EDE0DE; 
-        font-family: DM Serif Display, serif;
+            background-color: #492f21; 
+            border-color:#492f21;
+            color: #F1E4DC; 
+            font-family: DM Serif Display, serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .lightbrown-btn {
+            background-color: #dabeae;
+            border-color: #dabeae; 
+            color: #492f21;
+            font-family: DM Serif Display, serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #b24800; 
+            border-color:#b24800;
+            color: #F1E4DC; 
         }
 
         .h1 {
@@ -39,6 +61,7 @@
         }
         .normalheaders{
             font-family: DM Serif Display, serif;
+            color: #492f21;
         }
 
         .email {
@@ -46,6 +69,25 @@
             font-weight: 100;
             font-size: 20px;
         }
+
+        /* .table {
+        table-layout: fixed;
+        width: 100%;
+            
+        } */
+        /* .largercol {
+        width: 40%; 
+        }
+
+        .smallercol {
+        width: 20%;
+        } */
+
+        .tablecentered{
+            text-align: center;
+            /* padding: 10px 75px; */
+        }
+
     </style>
 </head>
 
@@ -71,61 +113,78 @@
 		</div>
         <div data-th-unless="${#lists.isEmpty(readingList)}">
             
-            <form method="GET" data-th-action="@{/Home/DisplayAndSearch}" class="row g-3 align-items-center">
+            <form method="GET" data-th-action="@{/Home/Search}" class="row g-3 align-items-center">
                 <div class="normalheaders">
                     <h2><label for="title" class="form-label">Search for books:</label></h2>
                 </div>
                 <div class="col-auto">
-                <input placeholder="Search by Book Title, Author or IBSN" type="text" name="input" id="input" class="form-control" size="135"/>
+                <input placeholder="Search by Book Title, Author or IBSN" type="text" name="input" id="input" class="form-control" size="125"/>
                 <!-- PROBLEM VALIDATE THAT INPUT IS NOT NULL BEFORE SEARCHING IF NOT GOT ERROR -->
                 </div>
                 <div class="col-auto">
-                <button type="submit" class="btn btn-primary brown-btn" style="width: 230px;">Search</button>
+                <button type="submit" class="btn btn-primary brown-btn" style="width: 220px;">Search</button>
                 </div>
             </form>
-            <br>
+            <br><br>
             <hr>
+            <div class="normalheaders">
+                <h2>Reading List</h2>
+            </div>
 
-            <h2>Reading List</h2>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    
+                        <th><div class="normalheaders"><h4>Book Details</h4></div></th>
+                        <th><div class="normalheaders"><h4>My Rating & Comments</h4></div></th>
+                        <th><div class="normalheaders"><h4>Action</h4></div></th>  
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-th-each="book: ${readingList}">
+                        <td class="col-lg-5">
+                            
+                            <strong><h4 data-th-text="*{book.title}"></h4></strong>
+                                <strong>Author(s):</strong> <span data-th-text="*{book.authors}"></span>
+                            </p>
+                            <div class="tablecentered">
+                                <img data-th-src="*{book.thumbnail}" width="150px">
+                            </div>
+                            <p>
+                                <strong>ISBN:</strong> <span data-th-text="*{book.isbn}"></span>
+                            </p>
+                            
+                        </td>
+                        <td class="col-lg-3">
+                            <p>
+                                <strong>Rating:</strong> <span data-th-text="*{book.rating}"></span>
+                            </p>
             
-            <article data-th-each="book: ${readingList}">
-                <h4 data-th-text="*{book.title}"></h4>
-                <div>
-                    <img data-th-src="*{book.thumbnail}" width="150px">
-                </div>
-
-                <p>
-                    <strong>Author(s):</strong> <span data-th-text="*{book.authors}"></span>
-                </p>
-
-                <p>
-                    <strong>Description:</strong> <span data-th-text="*{book.description}"></span>
-                </p>
-
-                <p>
-                    <strong>Category:</strong> <span data-th-text="*{book.category}"></span>
-                </p>
-
-                <p>
-                    <strong>Language:</strong> <span data-th-text="*{book.language}"></span>
-                </p>
-
-                <p>
-                    <strong>ISBN:</strong> <span data-th-text="*{book.isbn}"></span>
-                </p>
-
-                <p>
-                    <strong>Rating:</strong> <span data-th-text="*{book.rating}"></span>
-                </p>
-
-                <p>
-                    <strong>Comments:</strong> <span data-th-text="*{book.comments}"></span>
-                </p>
-            </article>
-
-            
+                            <p>
+                                <strong>Comments:</strong> <span data-th-text="*{book.comments}"></span>
+                            </p>
+                            
+                        </td>
+                        <td class="col-lg-3">
+                            
+                            <br>
+                            <a th:href="@{/Home/DisplayAndSearch}" class="btn btn-primary brown-btn" style="width: 230px; height: 50px;">Update</a>
+                            <br>
+                            <a th:href="@{/Home/DisplayAndSearch}" class="btn btn-primary lightbrown-btn" style="width: 230px;height: 50px">Delete</a>
+                            
+                        </td>
+                        <!-- <td>
+                            <a th:href="@{/employees/employeeupdate/{email}(email=${emp.email})}" class="btn btn-secondary">Update</a>
+                            <a th:href="@{/employees/employeedelete/{email}(email=${emp.email})}" class="btn btn-danger">Delete</a>
+                        </td> -->
+                        
+                        
+                    </tr>
+                </tbody>
+            </table> 
         </div>
-    </div>
-    
+    </div> 
 </body>
 </html>

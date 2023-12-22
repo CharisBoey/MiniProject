@@ -46,6 +46,7 @@ public class LoginController {
         if(result.hasErrors()){
             return "login";
         }
+        
         sess.setAttribute("login", login);
         return "redirect:/Home/MyReadingList";
     }
@@ -74,15 +75,20 @@ public class LoginController {
         return "creating";
     }
 
-    @GetMapping("/DisplayAndSearch")
+    @GetMapping("/Search")
     public String displayResult(Model model, @RequestParam MultiValueMap<String, String> params, HttpSession sess){
+
         String input = params.getFirst("input");
+
+        //Check if input is not null & not empty, if so, use api to retrieve books, else, get from existing book list, else, return empty booklist
         List<Book> bookList = new LinkedList<>();
-        if(input !=null){
+        if(input != null && !input.isEmpty()){
             bookList = bookSvc.getBookListTitle(input);
             model.addAttribute("bookList", bookList);
-        } else {
+        } else if(sess.getAttribute("bookList") !=null) {
             bookList = (List<Book>) sess.getAttribute("bookList");
+            model.addAttribute("bookList", bookList);
+        } else {
             model.addAttribute("bookList", bookList);
         }
 
@@ -92,9 +98,9 @@ public class LoginController {
 
         // Book readingAdd = new Book();
         // model.addAttribute("readingAdd", readingAdd);
-        List<ReadingListBook> readingList = bookRepo.getSavedReadingListBooks(email);
-        model.addAttribute("readingList", readingList);
-        return "success";
+        /* List<ReadingListBook> readingList = bookRepo.getSavedReadingListBooks(email);
+        model.addAttribute("readingList", readingList); */
+        return "booksearchlist";
     }
 
     /* @PostMapping("/DisplayAndSearch")
