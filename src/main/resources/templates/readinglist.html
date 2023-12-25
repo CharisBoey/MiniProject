@@ -5,17 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Serif+Display">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Garamond">
-    
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <title>Document</title>
 
     <style>
         body {
-            font-family:'Lora', serif;
+            font-family:Montserrat;
             margin: 0;
             padding: 0;
+            color: #1A273E;
         }
 
         .topborder {
@@ -33,48 +31,53 @@
             background-color: #1A273E; 
             border-color:#1A273E;
             color: #FFF; 
-            font-family: DM Serif Display, serif;
+            font-family: Montserrat;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
+            font-weight: bold;
         }
 
         .mediumblue-btn {
             background-color: #576484;
             border-color: #576484; 
             color: #FFF;
-            font-family: DM Serif Display, serif;
+            font-family: Montserrat;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
+            font-weight: bold;
         }
         .yellow-btn {
             background-color: #F1A81A;
             border-color: #F1A81A; 
             color: #FFF;
-            font-family: DM Serif Display, serif;
+            font-family:Montserrat;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
+            font-weight: bold;
         }
         .btn:hover {
             /* background-color: #6E737E; 
             border-color:#6E737E;
             color: #FFF;   */
-            background-color: #1A273E; 
-            border-color:#1A273E;
-            color: #FFF;
+            background-color: #D5E3EE; 
+            border-color:#D5E3EE;
+            color: #1F273A;
+            font-weight: bold;
         }
 
         .h1 {
             font-family: "Lobster", sans-serif;
+            font-weight: bolder;
             margin: 0;
         }
         .normalheaders{
-            font-family: DM Serif Display, serif;
+            font-family: Montserrat;
             color: #1F273A;
         }
 
@@ -108,7 +111,8 @@
 <body>
     <div class="topborder">
         <div class="h1">
-            <h1>InkIt.</h1>
+            <h1>InkIt. <img src="/quill.png" height="50">
+            </h1>
         </div>
         <div class="email">
             <i><span data-th-text="${email}"></span></i>
@@ -119,48 +123,49 @@
 
     <div class="container">
         <br><br>
-        <div data-th-if="${#lists.isEmpty(readingList)}">
-            <br><br>
-			<h2>Empty Reading List</h2>
-            <p>Please add a book to your reading list</p>
-            <hr>
-		</div>
-        <div data-th-unless="${#lists.isEmpty(readingList)}">
-            
-            <form method="GET" data-th-action="@{/Home/Search}" class="row g-3 align-items-center">
-                <div class="normalheaders">
-                    <h2><label for="title" class="form-label">Search for books:</label></h2>
-                </div>
-                <div class="col-auto">
-                <input placeholder="Search by Book Title, Author or IBSN" type="text" name="input" id="input" class="form-control" size="125"/>
-                <!-- PROBLEM VALIDATE THAT INPUT IS NOT NULL BEFORE SEARCHING IF NOT GOT ERROR -->
-                </div>
-                <div class="col-auto">
-                <button type="submit" class="btn btn-primary darkblue-btn" style="width: 220px;">Search</button>
-                </div>
-            </form>
-            <br><br>
-            <hr>
+        <form method="GET" data-th-action="@{/Home/Search}" class="row g-3 align-items-center">
             <div class="normalheaders">
-                <h2>Reading List</h2>
+                <h2><strong><label for="title" class="form-label"><img src="/magnifyingglass.png" height="40"> Search for books: </label></strong></h2>
             </div>
+            <div class="col-auto">
+            <input placeholder="Search by Book Title, Author or IBSN" type="text" name="input" id="input" class="form-control" size="120"/>
+            <!-- PROBLEM VALIDATE THAT INPUT IS NOT NULL BEFORE SEARCHING IF NOT GOT ERROR -->
+            </div>
+            <div class="col-auto">
+            <button type="submit" class="btn btn-primary darkblue-btn" style="width: 215px;">Search</button>
+            </div>
+        </form>
+        <br><br>
+        <div data-th-if="${#lists.isEmpty(readingList)}">
+            <hr>
+            <br>
+			<h2><strong><img src="/openbook.png" height="40"> Empty Reading List</strong></h2>
+            <p>Please add a book to your reading list</p>
+		</div>
 
+        <div data-th-unless="${#lists.isEmpty(readingList)}">
+            <hr>
+            <br>
+            <div class="normalheaders">
+                <h2><strong> <img src="/openbook.png" height="40"> Reading List:</strong></h2>
+            </div>
+            <br>
 
             <table class="table table-striped">
                 <thead>
                     <tr>
                     
-                        <th><div class="normalheaders"><h4>Book Details</h4></div></th>
-                        <th><div class="normalheaders"><h4>My Rating & Comments</h4></div></th>
-                        <th><div class="normalheaders"><h4>Action</h4></div></th>  
+                        <th><div class="normalheaders"><h3>Book Details</h3></div></th>
+                        <th><div class="normalheaders"><h3>Rating & Comments</h3></div></th>
+                        <th><div class="normalheaders"><h3>Action</h3></div></th>  
                         
                     </tr>
                 </thead>
                 <tbody>
                     <tr data-th-each="book: ${readingList}">
-                        <td class="col-lg-5">
+                        <td class="col-lg-4">
                             
-                            <strong><h4 data-th-text="*{book.title}"></h4></strong>
+                            <h5><strong><span data-th-text="*{book.title}"></span></strong></h5>
                                 <strong>Author(s):</strong> <span data-th-text="*{book.authors}"></span>
                             </p>
                             <div class="tablecentered">
@@ -184,10 +189,10 @@
                         <td class="col-lg-3">
                             
                             <br>
-                            <a th:href="@{/Home/DisplayAndSearch}" class="btn btn-primary mediumblue-btn" style="width: 230px; height: 50px;">Update</a>
+                            <a th:href="@{/Home/Update/{isbn}(isbn=${book.isbn})}" class="btn btn-primary mediumblue-btn" style="width: 230px; height: 50px;">Update</a>
                             <br>
-                            <a th:href="@{/Home/DisplayAndSearch}" class="btn btn-primary yellow-btn" style="width: 230px;height: 50px">Delete</a>
-                            
+                            <a th:href="@{/Home/Delete/{isbn}(isbn=${book.isbn})}" class="btn btn-primary yellow-btn" style="width: 230px;height: 50px">Delete</a>
+
                         </td>
                         <!-- <td>
                             <a th:href="@{/employees/employeeupdate/{email}(email=${emp.email})}" class="btn btn-secondary">Update</a>

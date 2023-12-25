@@ -62,15 +62,19 @@ public class BookRepository {
         return readingListTemplate.hasKey(email+"book");
     }
 
+    public void deleteChosenBook(String email, ReadingListBook ReadingListBook){
+        readingListTemplate.opsForHash().delete(email+"book", ReadingListBook.getIsbn());
+    }
+
     public List<ReadingListBook> getSavedReadingListBooks(String email){
         HashOperations<String,String,Object> readingList = readingListTemplate.opsForHash();
         List<ReadingListBook> readingListBooks = new LinkedList<>();
         if(hasReadingList(email)){
-            System.out.println("TRUUUUUUUUUUUUUUUUUUUUUUUUUUEEEEEEEEEEEEEEEEEEe");
+            //System.out.println("TRUUUUUUUUUUUUUUUUUUUUUUUUUUEEEEEEEEEEEEEEEEEEe");
             Map<String, Object> hashReadingListEntries = readingList.entries(email+"book");
             for (String i : hashReadingListEntries.keySet()){
                 ReadingListBook book = (ReadingListBook) hashReadingListEntries.get(i);
-                System.out.println("*******************"+book.getTitle());
+                //System.out.println("*******************"+book.getTitle());
                 readingListBooks.add(book);
             }
         }

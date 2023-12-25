@@ -18,6 +18,7 @@ import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
 import jakarta.json.JsonValue;
 import sg.com.vttp.MiniProject.model.Book;
+import sg.com.vttp.MiniProject.model.ReadingListBook;
 
 @Service
 public class BookService {
@@ -161,7 +162,7 @@ public class BookService {
             //Get Book Description
             String description = jsonObjectVolumeInfo.getString("description", "No Description");
             
-            //Get Book ISBN_10
+            //Get Book ISBN
             JsonArray isbnVersions = jsonObjectVolumeInfo.getJsonArray("industryIdentifiers"); 
             String isbn10 = "";
             String isbn13 = "";
@@ -185,7 +186,7 @@ public class BookService {
             } else if (isbn13 !=null){
                 isbn = isbn13;
             } else {
-                isbn = "No ISBN Found";
+                isbn = null;
             }
 
             
@@ -220,9 +221,30 @@ public class BookService {
             String language = jsonObjectVolumeInfo.getString("language", "No Language Specified");
 
             book = new Book(title, isbn, authorListOfNames, description, thumbnail, categoryListInString, language);
-            bookList.add(book);
+            
+            if(!isbn.isEmpty()){
+                bookList.add(book);
+            }
+            
         }
         return bookList;
+    }
+
+    public ReadingListBook readingListBook(String isbn){
+        String input = "isbn:"+isbn;
+        Book originalToSaveBook = getBookListTitle(input).get(0);
+        ReadingListBook readingListBook = new ReadingListBook(
+            originalToSaveBook.getTitle(),
+            originalToSaveBook.getIsbn(), 
+            originalToSaveBook.getAuthors(), 
+            originalToSaveBook.getDescription(), 
+            originalToSaveBook.getThumbnail(), 
+            originalToSaveBook.getCategory(), 
+            originalToSaveBook.getLanguage(), 
+            "  "+"/5", 
+            "");
+
+        return readingListBook;
     }
 
 

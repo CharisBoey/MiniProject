@@ -20,6 +20,7 @@ import jakarta.validation.Valid;
 import sg.com.vttp.MiniProject.model.Book;
 import sg.com.vttp.MiniProject.model.Login;
 import sg.com.vttp.MiniProject.model.ReadingListBook;
+import sg.com.vttp.MiniProject.model.RatingAndComments;
 import sg.com.vttp.MiniProject.repository.BookRepository;
 import sg.com.vttp.MiniProject.service.BookService;
 
@@ -69,6 +70,8 @@ public class LoginController {
         // model.addAttribute("book", book);
         List<ReadingListBook> readingList = bookRepo.getSavedReadingListBooks(email);
         model.addAttribute("readingList", readingList);
+
+        
         if (successfullyRetrieved){
             return "readinglist";
         }
@@ -138,36 +141,59 @@ public class LoginController {
     }
    
     @GetMapping("/Save/{isbn}")
-    public String updateEmployee(@PathVariable("isbn") String isbn, Model model, HttpSession sess) {
+    public String saveBook(@PathVariable("isbn") String isbn, Model model, HttpSession sess) {
         //PROBLEM: DEAL WITH BOOKS WITH NO ISBN
 
-        //get book related to isbn + model.addattribute;
-        //model.addAttribute("", );
-        String input = "isbn:"+isbn;
-        /* List<Book> readingList = new LinkedList<>();
-        
-        for(Book book: bookSvc.getBookListTitle(input)){
-            readingList.add(book);
-        }
-
-        sess.setAttribute("readingList", readingList);
-        model.addAttribute("readingList", readingList); */
-        Book originalToSaveBook = bookSvc.getBookListTitle(input).get(0);
-        ReadingListBook readingListBook = new ReadingListBook(
-            originalToSaveBook.getTitle(),
-            originalToSaveBook.getIsbn(), 
-            originalToSaveBook.getAuthors(), 
-            originalToSaveBook.getDescription(), 
-            originalToSaveBook.getThumbnail(), 
-            originalToSaveBook.getCategory(), 
-            originalToSaveBook.getLanguage(), 
-            "5/5", 
-            "commentsss");
+        ReadingListBook readingListBook = bookSvc.readingListBook(isbn);
            
         String email = (String) sess.getAttribute("email");
         bookRepo.saveChosenBook(email, readingListBook);
         model.addAttribute("readingListBook", readingListBook);
+        
         // return "redirect:/Home/DisplayAndSearch"; 
         return "redirect:/Home/MyReadingList"; 
+    }
+
+    @GetMapping("/Update/{isbn}")
+    public String updateBook(@PathVariable("isbn") String isbn, Model model, HttpSession sess){
+        RatingAndComments ratingAndComments = new RatingAndComments();
+        model.addAttribute("ratingAndComments", ratingAndComments);
+        
+        /* ReadingListBook readingListBook = new ReadingListBook();
+        model.addAttribute("readingListBook", readingListBook);
+        sess.setAttribute("readingListBook", readingListBook); */
+        
+        String email = (String) sess.getAttribute("email");
+        model.addAttribute("email", email);
+        model.addAttribute("isbn", isbn);
+        return "update";
+    }
+
+    @PostMapping("/Update/{isbn}")
+    public String updateBookValidation(@PathVariable("isbn") String isbn, @Valid @ModelAttribute RatingAndComments ratingAndComments, BindingResult result, Model model, HttpSession sess){
+        model.addAttribute("isbn", isbn);
+        ReadingListBook readingListBook = bookSvc.readingListBook(isbn);
+
+         if(result.hasErrors()){
+            return "update";
+        }
+        
+        
+        readingListBook.setRating(ratingAndComments.getRating().toString()+"/5");
+        readingListBook.setComments(ratingAndComments.getComments());
+
+        String email = (String) sess.getAttribute("email");
+        
+        bookRepo.saveChosenBook(email, readingListBook);
+
+        return "redirect:/Home/MyReadingList";
+    }
+
+    @GetMapping("/Delete/{isbn}")
+    public String deleteBook(@PathVariable("isbn") String isbn, HttpSession sess){
+        String email = (String) sess.getAttribute("email");
+        ReadingListBook readingListBook = bookSvc.readingListBook(isbn);
+        bookRepo.deleteChosenBook(email, readingListBook);
+        return "redirect:/Home/MyReadingList";
     }
 }

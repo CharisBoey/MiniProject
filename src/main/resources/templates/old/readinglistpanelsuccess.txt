@@ -51,19 +51,10 @@
 
 
 
-        /* Apply a grid layout */
-        .panel-view {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 20px;
-        }
+        
+        
 
-        /* Style each panel item */
-        .panel-item {
-        border: 1px solid #ddd;
-        padding: 15px;
-        text-align: center;
-        }
+        
 
 
 
