@@ -1,6 +1,7 @@
 package sg.com.vttp.MiniProject.service;
 
 import java.io.StringReader;
+import java.security.SecureRandom;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -123,7 +124,7 @@ public class BookService {
         return response;
     }
 
-     public List<Book> getBookListTitle(String input){
+    public List<Book> getBookListTitle(String input){
 
         List<Book> bookList = new LinkedList<>();
         Book book = new Book();
@@ -241,10 +242,73 @@ public class BookService {
             originalToSaveBook.getThumbnail(), 
             originalToSaveBook.getCategory(), 
             originalToSaveBook.getLanguage(), 
-            "  "+"/5", 
-            "");
+            " ? "+"/5", 
+            "...", false);
 
         return readingListBook;
+    }
+
+    public Book getSurpriseBook(){
+        //get random index
+        ResponseEntity<String> randomResult = getRelevantBookData("*");
+        String randomJsonString = randomResult.getBody();
+        JsonReader randomJsonReader = Json.createReader(new StringReader(randomJsonString));
+        JsonObject randomJsonMainObject = randomJsonReader.readObject();
+        Integer totalItems = randomJsonMainObject.getInt("totalItems");
+
+        SecureRandom random = new SecureRandom();
+        Integer randomIndex = random.nextInt(totalItems);
+
+        //----------------------------------- get start index ---------------------------------
+        ResponseEntity<String> result = getRelevantBookData("startIndex:"+randomIndex);
+        String jsonString = result.getBody();
+        JsonReader jsonReader = Json.createReader(new StringReader(jsonString));
+        JsonObject jsonMainObject = jsonReader.readObject();
+
+        Boolean notfound = true;
+        String isbn = "";
+
+        while(notfound){
+    
+            //get isbn related to random index
+            JsonArray jsonArrayItemsInMain = jsonMainObject.getJsonArray("items");
+            JsonObject surpriseBook = (JsonObject) jsonArrayItemsInMain.get(0);
+            JsonObject jsonObjectVolumeInfo = surpriseBook.getJsonObject("volumeInfo");
+            JsonArray isbnVersions = jsonObjectVolumeInfo.getJsonArray("industryIdentifiers"); 
+            String isbn10 = "";
+            String isbn13 = "";
+            if (isbnVersions != null) {
+                for (JsonValue i :isbnVersions){
+                    JsonObject isbnFound = i.asJsonObject();
+                    String type = isbnFound.getString("type");
+                    if (type.equals("ISBN_10")){
+                        isbn10 = isbnFound.getString("identifier");
+                    } else if (type.equals("ISBN_13")){
+                        isbn13 = isbnFound.getString("identifier"); 
+                    }
+                }
+            } else {
+                isbn10 = null;
+                isbn13 = null;
+            }
+            
+            if (isbn10 != null){
+                isbn = isbn10;
+            } else if (isbn13 !=null){
+                isbn = isbn13;
+            } else {
+                isbn = null;
+            }
+                
+            if(!isbn.isEmpty()){
+                notfound=false;
+            }
+        }
+        
+        String input = "isbn:"+isbn;
+        Book surpriseBook = getBookListTitle(input).get(0);
+        
+        return surpriseBook;
     }
 
 

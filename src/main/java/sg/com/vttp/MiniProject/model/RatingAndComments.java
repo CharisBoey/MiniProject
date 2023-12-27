@@ -17,6 +17,8 @@ public class RatingAndComments {
     @NotNull(message="Must fill in rating")
     @Min(value=0, message="Rating must be between 1-5")
     @Max(value=5, message="Rating must be between 1-5")
-    private Integer rating;
+    private Double rating;
     private String comments;
+    @NotNull(message="Must indicate completion status")
+    private String completed;
 }

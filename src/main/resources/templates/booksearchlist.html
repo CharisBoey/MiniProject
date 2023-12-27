@@ -37,6 +37,18 @@
             text-align: center;
             font-weight: bold;
         }
+        .logout-btn {
+            background-color: #1A273E; 
+            border-color:#1A273E;
+            color: #FFF; 
+            font-family: Montserrat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: bold;
+            font-size: 10px;
+        }
 
         .mediumblue-btn {
             background-color: #576484;
@@ -65,8 +77,8 @@
             /* background-color: #6E737E; 
             border-color:#6E737E;
             color: #FFF;   */
-            background-color: #D5E3EE; 
-            border-color:#D5E3EE;
+            background-color: #FFF; 
+            border-color:#1F273A;
             color: #1F273A;
             font-weight: bold;
         }
@@ -201,9 +213,13 @@
             <h1>InkIt. <img src="/quill.png" height="50">
             </h1>
         </div>
-        <div class="email">
-            <i><span data-th-text="${email}"></span></i>
+        <div>
+            <i><span class="email" data-th-text="${email}"></span></i>
+            <br>
+            <a th:href="@{/Home/Logout}" class="btn btn-primary logout-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
+            
         </div>
+        
     </div>
     
 
@@ -228,7 +244,6 @@
             </form>
             <br><br>
             <hr>
-            <br>
             <h2><strong><img src="/openbook.png" height="40"> Empty Book List</strong></h2>
             <p>Please search for a book</p>
 		</div>

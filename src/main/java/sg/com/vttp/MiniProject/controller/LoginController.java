@@ -181,6 +181,11 @@ public class LoginController {
         
         readingListBook.setRating(ratingAndComments.getRating().toString()+"/5");
         readingListBook.setComments(ratingAndComments.getComments());
+        if (ratingAndComments.getCompleted().equals("true")){
+            readingListBook.setCompleted(true);
+        } else{
+            readingListBook.setCompleted(false);
+        }
 
         String email = (String) sess.getAttribute("email");
         
@@ -196,4 +201,28 @@ public class LoginController {
         bookRepo.deleteChosenBook(email, readingListBook);
         return "redirect:/Home/MyReadingList";
     }
+
+    @GetMapping("/Logout")
+    public String logout(HttpSession sess){
+        sess.invalidate();
+        return "redirect:/Home/Login";
+    }
+
+    @GetMapping("/SurpriseBook")
+    public String surpriseBook(Model model, HttpSession sess){
+        String email = (String) sess.getAttribute("email");
+        model.addAttribute("email", email);
+        
+        Book surpriseBook = bookSvc.getSurpriseBook();
+        /* System.out.println("88888888888888888888888888888888888888888888888888"+surpriseBook.getTitle()); */
+        model.addAttribute("surpriseBook", surpriseBook);
+        return "surprisebook";
+    }
+
+    @GetMapping("/Credits")
+    public String credits(){
+
+        return "credits";
+    }
+
 }

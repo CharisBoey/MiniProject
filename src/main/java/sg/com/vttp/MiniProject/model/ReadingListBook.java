@@ -19,4 +19,5 @@ public class ReadingListBook {
     private String language;
     private String rating;
     private String comments;
+    private Boolean completed;
 }

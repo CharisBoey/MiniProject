@@ -37,8 +37,8 @@
         
         .background{
             background-color: #D5E3EE;
-            width: 800px;
-            height: 500px;
+            width: 900px;
+            height: 600px;
             border-radius: 20px;
             display: flex;
             flex-direction: column;
@@ -93,17 +93,51 @@
         .styleleft{
             text-align: left;
         }
-        .stylecenter{
-            display:flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            
+        .description {
+            text-align: justify;
+            overflow: auto;
+            text-overflow: ellipsis;
+            height: 100px;
+            scrollbar-width: thin;
+            padding:25px 100px;
         }
+
+        /* For WebKit browsers (Chrome, Safari) */
+        .description::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .description::-webkit-scrollbar-thumb {
+            background-color: #1A273E; /* Color of the thumb */
+            border-radius: 5px; /* Rounded corners of the thumb */
+        }
+
+        .description::-webkit-scrollbar-track {
+            background-color: #D5E3EE; /* Color of the track */
+        }
+
+        .imgbackground {
+        height: 235px; /* Set a fixed height for the images */
+        width: 165px;
+        object-fit: contain; /* Maintain aspect ratio and cover the container */
+        background-color: #FFF;
+        
+        border: 10px solid #FFF; /* Add a border with the desired color */
+        border-radius: 5px;
+        }
+
         .buttonheader {
             display: flex;
-            margin-left: 90%;
         }
+        
+        .alignment{
+            margin-right : 650px;
+        }
+
+        .alignright{
+
+        }
+        
     </style>
 </head>
 <body>
@@ -116,80 +150,49 @@
             <i><span data-th-text="${email}"></span></i>
             <br>
             <a th:href="@{/Home/Logout}" class="btn btn-primary logout-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
+            
         </div>
     </div>
-    <br><br><br><br>
+    <br>
+    <!-- style="margin-right:75%;" -->
     <div class="background">
+        <br>
         <div class="buttonheader">
-            <a th:href="@{/Home/MyReadingList}"><img src="/close.png" height="20"></a>
+            <a data-th-href="@{/Home/Save/{isbn}(isbn=${surpriseBook.isbn})}" class="btn btn-primary mediumblue-btn alignment">Add to Reading List</a>
+    
+            <a th:href="@{/Home/SurpriseBook}"><img src="/refresh.png" height="25"></a>
         </div>
-        <div class="normalheaders">
-            <h1>Update Reading List</h1>
-            <br>
+       
+        
+        <div class="title">
+            <h5><strong><span data-th-text="*{surpriseBook.title}"></span></strong></h5>
         </div>
+        <div class="imgbackground">
+            <img data-th-src="*{surpriseBook.thumbnail}" width="150px">
+        </div>
+        <br>
+        <p>
+            <strong>Author(s):</strong> <span data-th-text="*{surpriseBook.authors}"></span>
+        </p>
 
-        <form data-th-action="@{/Home/Update/{isbn}(isbn=${isbn})}" method="POST" data-th-object="${ratingAndComments}">
-            <table>
-                <tr>
-                    <td class="styleleft"> 
-                        <label for="rating">Rating:</label> 
-                    </td>
-                    <td>
-                        <input type="number" step=".01" id="rating" style="width: 35em"
-                                placeholder="Please type in your rating" data-th-field="*{rating}" >
-                        <div class="btn-btn-primary mediumblue-btn" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p></p>
-                    </td>
-                </tr>
-                <tr>
-                    
-                    <td class="styleleft">
-                        <label for="comments">Comments:</label>
-                    </td>
-                    <td>
-                        <textarea placeholder="Please type in your comments" name="comments"  style="width: 35em" rows="8"></textarea>
-                        <!-- <input type="comments" id="comments" style="width: 16.5em" 
-                                placeholder="Please type in your comments" data-th-field="*{comments}">
-                        <div class="btn-btn-primary mediumblue-btn" th:if="${#fields.hasErrors('comments')}" th:errors="*{comments}"></div> -->
-                    
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td class="styleleft"> 
-                        <label for="completed">Finished:</label> 
-                    </td>
-                    <td class="stylecenter">
-                        <input type="radio" name="finished" value="true" data-th-field="*{completed}" >Yes &nbsp&nbsp&nbsp
-                        <input type="radio" name="finished"checked="checked" value="false"data-th-field="*{completed}" >No
+        <p class="description">
+            <strong>Description:</strong> <span data-th-text="*{surpriseBook.description}"></span>
+        </p>
 
-                        <div class="btn-btn-primary mediumblue-btn" th:if="${#fields.hasErrors('completed')}" th:errors="*{completed}"></div>
-                    </td>
-                </tr>
-                
-            </table>
-            <br>
+        <p>
+            <strong>Category:</strong> <span data-th-text="*{surpriseBook.category}"></span>
+        </p>
 
-            <button type="submit" class="btn btn-primary darkblue-btn" style="width: 360px;" >Update</button>
+        <p>
+            <strong>Language:</strong> <span data-th-text="*{surpriseBook.language}"></span>
+        </p>
 
-        </form>
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>   
+        <p>
+            <strong>ISBN:</strong> <span data-th-text="*{surpriseBook.isbn}"></span>
+        </p>
+    </div>
+    <div>
+        <a th:href="@{/Home/MyReadingList}" class="btn btn-primary darkblue-btn" style="width:200px; height:35px; margin-left: 85%;">Back to Reading List</a>
+    </div>
 </body>
 </html>
-
