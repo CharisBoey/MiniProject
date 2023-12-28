@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -29,77 +28,7 @@ public class BookService {
 
     public String base_url="https://www.googleapis.com/books/v1/volumes?";
 
-    /* public ResponseEntity<String> getAllBookData(){
-        String url = UriComponentsBuilder
-                    .fromUriString(base_url)
-                    .queryParam("q", "*")
-                    .queryParam("printType", "books")
-                    .queryParam("key", BOOKS_APIKEY)
-                    .toUriString();
-                    //.queryParam("maxResults", 40)
-        RequestEntity<Void> request = RequestEntity.get(url).build();
-
-        RestTemplate template = new RestTemplate();
-        ResponseEntity<String> response = null;
-        try{
-            response = template.exchange(request, String.class);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return response;
-    }
-
-    public List<Book> getBookList(){
-
-        List<Book> bookList = new LinkedList<>();
-        Book book = new Book();
-        ResponseEntity<String> result = getAllBookData();
-        String jsonString = result.getBody();
-
-        //read data
-        JsonReader jsonReader = Json.createReader(new StringReader(jsonString));
-        JsonObject jsonMainObject = jsonReader.readObject();
-        JsonArray jsonArrayItemsInMain = jsonMainObject.getJsonArray("items");
-
-        for(JsonValue item: jsonArrayItemsInMain){
-            JsonObject jsonObjectIndivBook = (JsonObject) item;
-            String id = jsonObjectIndivBook.getString("id");
-            JsonObject jsonObjectVolumeInfo = jsonObjectIndivBook.getJsonObject("volumeInfo");
-            String title = jsonObjectVolumeInfo.getString("title");
-            
-            book = new Book(title, id);
-            bookList.add(book);
-        }
-        return bookList;
-    } */
-
-
-   /*  public ResponseEntity<String> getRelevantBookData(String input){
-        input = input.trim().replace(" ","+");
-
-        String url = UriComponentsBuilder
-                    .fromUriString(base_url)
-                    .queryParam("q", "*+intitle=" + input)
-                    .queryParam("printType", "books")
-                    .queryParam("key", BOOKS_APIKEY)
-                    .build(false)
-                    .toUriString();
-                    //.queryParam("maxResults", 40)
-        System.out.println("!@!@!@!@!@!@@@@@@@@@@@@" + url);
-        RequestEntity<Void> request = RequestEntity.get(url).build();
-
-        RestTemplate template = new RestTemplate();
-        ResponseEntity<String> response = null;
-        try{
-            response = template.exchange(request, String.class);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return response;
-    } */
-
     public ResponseEntity<String> getRelevantBookData(String input){
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+input);
         input = input.trim().replaceAll(" ","+");
 
         String url = UriComponentsBuilder
@@ -110,8 +39,8 @@ public class BookService {
                     .queryParam("maxResults", 40)
                     .build(false)
                     .toUriString();
-                    //.queryParam("maxResults", 40)
-        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" + url);
+                    
+        //System.out.println(url);
         RequestEntity<Void> request = RequestEntity.get(url).build();
 
         RestTemplate template = new RestTemplate();

@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
@@ -54,10 +53,6 @@ public class BookRepository {
         chosenBookList.put(email+"book", ReadingListBook.getIsbn(), ReadingListBook);
     }
 
-    // public void deleteReadingList(String email, ReadingListBook ReadingListBook){
-    //     readingListTemplate.delete(email);
-    // }
-
     public boolean hasReadingList(String email){
         return readingListTemplate.hasKey(email+"book");
     }
@@ -70,11 +65,10 @@ public class BookRepository {
         HashOperations<String,String,Object> readingList = readingListTemplate.opsForHash();
         List<ReadingListBook> readingListBooks = new LinkedList<>();
         if(hasReadingList(email)){
-            //System.out.println("TRUUUUUUUUUUUUUUUUUUUUUUUUUUEEEEEEEEEEEEEEEEEEe");
+        
             Map<String, Object> hashReadingListEntries = readingList.entries(email+"book");
             for (String i : hashReadingListEntries.keySet()){
                 ReadingListBook book = (ReadingListBook) hashReadingListEntries.get(i);
-                //System.out.println("*******************"+book.getTitle());
                 readingListBooks.add(book);
             }
         }
