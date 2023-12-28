@@ -69,6 +69,18 @@
             text-align: center;
             font-style: italic;
         }
+        .mini-btn {
+            background-color: #1A273E; 
+            border-color:#1A273E;
+            color: #FFF; 
+            font-family: Montserrat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: bold;
+            font-size: 10px;
+        }
         .btn:hover {
             /* background-color: #6E737E; 
             border-color:#6E737E;
@@ -95,12 +107,15 @@
             <h1>InkIt. <img src="/quill.png" height="50">
             </h1>
         </div>
+        <div>
+            <a th:href="@{/Home/Credits}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Credits</a>
+        </div>
     </div>
     <br><br><br><br>
     <div class="background">
         <div class="normalheaders">
-            <h1>Welcome to BookWorm</h1>
-        
+            <h1>Welcome to InkIt.</h1>
+            <br>
             <h4>Login</h4>
             <br>
         </div>

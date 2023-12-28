@@ -61,7 +61,7 @@
             text-align: center;
             font-weight: bold;
         }
-        .logout-btn {
+        .mini-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
             color: #FFF; 
@@ -135,7 +135,7 @@
         <div class="email">
             <i><span data-th-text="${email}"></span></i>
             <br>
-            <a th:href="@{/Home/Logout}" class="btn btn-primary logout-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
+            <a th:href="@{/Home/Logout}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
         </div>
     </div>
     
@@ -207,9 +207,12 @@
                             <div data-th-if="${book.completed}">
                                 <img src="/completed.png" height="25">   Completed
                             </div>
+                            
                             <div data-th-unless="${book.completed}">
                                 <img src="/notcompleted.png" height="25">   Uncompleted
                             </div>
+                            
+                            <br>
                             <p>
                                 <strong>Rating:</strong> <span data-th-text="*{book.rating}"></span>
                             </p>

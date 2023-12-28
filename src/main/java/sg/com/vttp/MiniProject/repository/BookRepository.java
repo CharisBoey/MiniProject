@@ -33,7 +33,8 @@ public class BookRepository {
         return loginTemplate.hasKey(email);
     }
 
-    public boolean saveOrRetrieveUser(String email, String password){
+    public boolean RetrieveUser(String email, String password){
+        //Only if HAVE USER, check if password correct 
         ValueOperations<String, String> user = loginTemplate.opsForValue();
         
         if(hasUser(email)){
@@ -42,8 +43,7 @@ public class BookRepository {
                 return true;
             }
         }
-
-        saveUser(email, password);
+        
         return false;
     }
 

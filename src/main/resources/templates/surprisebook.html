@@ -58,7 +58,7 @@
             margin: 0 auto;
             
         }
-        .logout-btn {
+        .mini-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
             color: #FFF; 
@@ -120,8 +120,11 @@
         height: 235px; /* Set a fixed height for the images */
         width: 165px;
         object-fit: contain; /* Maintain aspect ratio and cover the container */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         background-color: #FFF;
-        
         border: 10px solid #FFF; /* Add a border with the desired color */
         border-radius: 5px;
         }
@@ -137,6 +140,11 @@
         .alignright{
 
         }
+        .email {
+            text-align: right;
+            font-weight: 100;
+            font-size: 20px;
+        }
         
     </style>
 </head>
@@ -149,7 +157,7 @@
         <div class="email">
             <i><span data-th-text="${email}"></span></i>
             <br>
-            <a th:href="@{/Home/Logout}" class="btn btn-primary logout-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
+            <a th:href="@{/Home/Logout}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
             
         </div>
     </div>
@@ -168,7 +176,7 @@
             <h5><strong><span data-th-text="*{surpriseBook.title}"></span></strong></h5>
         </div>
         <div class="imgbackground">
-            <img data-th-src="*{surpriseBook.thumbnail}" width="150px">
+            <img data-th-src="*{surpriseBook.thumbnail}" width="125px">
         </div>
         <br>
         <p>

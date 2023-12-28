@@ -37,7 +37,7 @@
             text-align: center;
             font-weight: bold;
         }
-        .logout-btn {
+        .mini-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
             color: #FFF; 
@@ -144,7 +144,6 @@
         width: 165px;
         object-fit: contain; /* Maintain aspect ratio and cover the container */
         background-color: #FFF;
-        
         border: 10px solid #FFF; /* Add a border with the desired color */
         border-radius: 5px;
         }
@@ -216,7 +215,7 @@
         <div>
             <i><span class="email" data-th-text="${email}"></span></i>
             <br>
-            <a th:href="@{/Home/Logout}" class="btn btn-primary logout-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
+            <a th:href="@{/Home/Logout}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
             
         </div>
         
@@ -275,7 +274,7 @@
                         <h5 data-th-text="*{book.title}"></h5>
                     </div>
                     <div>
-                        <img data-th-src="*{book.thumbnail}" width="150px">
+                        <img data-th-src="*{book.thumbnail}" width="125px">
                     </div>
                     <br>
                     <p>

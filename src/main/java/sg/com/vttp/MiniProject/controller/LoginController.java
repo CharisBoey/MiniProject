@@ -1,5 +1,6 @@
 package sg.com.vttp.MiniProject.controller;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,11 +46,31 @@ public class LoginController {
     @PostMapping("/Login")
     public String loginProcessing(@Valid @ModelAttribute Login login, BindingResult result, Model model, HttpSession sess){
 
+        String email = login.getEmail();
+        String password = login.getPassword();
+        
         if(result.hasErrors()){
             return "login";
         }
+
+        //If new user, auto create...
+        if(!bookRepo.hasUser(email)){
+            model.addAttribute("email", email);
+            sess.setAttribute("email", email);
+            return "creating";
+        }
+
+        //If old user, check password
+        Boolean successfullyRetrieved = bookRepo.RetrieveUser(email, password);
         
-        sess.setAttribute("login", login);
+        
+        if(!successfullyRetrieved){
+            FieldError err = new FieldError("login", "password", "Wrong Password, please try again");
+            result.addError(err);
+            return "login";
+        }
+
+        sess.setAttribute("email", email);
         return "redirect:/Home/MyReadingList";
     }
     
@@ -56,13 +78,14 @@ public class LoginController {
     @GetMapping("/MyReadingList")
     public String userValidation(HttpSession sess, Model model){
         //Validate User (If have existing account, get data, if not create new account)
-        Login login = (Login) sess.getAttribute("login");
+        /* Login login = (Login) sess.getAttribute("login");
         String email = login.getEmail();
         String password = login.getPassword();
-        Boolean successfullyRetrieved = bookRepo.saveOrRetrieveUser(email, password);
-        model.addAttribute("login", login);
+        Boolean successfullyRetrieved = bookRepo.saveOrRetrieveUser(email, password); */
+        //model.addAttribute("login", login);
+        String email = (String) sess.getAttribute("email");
         model.addAttribute("email", email);
-        sess.setAttribute("email", email);
+        
 
         // List<Book> bookList = bookSvc.getBookList();
         // model.addAttribute("bookList", bookList);
@@ -72,10 +95,11 @@ public class LoginController {
         model.addAttribute("readingList", readingList);
 
         
-        if (successfullyRetrieved){
-            return "readinglist";
+        /* if (successfullyRetrieved){
+            
         }
-        return "creating";
+        return "creating"; */
+        return "readinglist";
     }
 
     @GetMapping("/Search")

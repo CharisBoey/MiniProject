@@ -74,6 +74,19 @@
             border-color: #576484; 
             color: #FFF;
         }
+
+        .mini-btn {
+            background-color: #1A273E; 
+            border-color:#1A273E;
+            color: #FFF; 
+            font-family: Montserrat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: bold;
+            font-size: 10px;
+        }
         
         
     </style>
@@ -83,6 +96,9 @@
         <div class="h1">
             <h1>InkIt. <img src="/quill.png" height="50">
             </h1>
+        </div>
+        <div>
+            <a th:href="@{/Home/Login}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Login</a>
         </div>
     </div>
     

@@ -58,7 +58,7 @@
             margin: 0 auto;
             
         }
-        .logout-btn {
+        .mini-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
             color: #FFF; 
@@ -104,6 +104,11 @@
             display: flex;
             margin-left: 90%;
         }
+        .email {
+            text-align: right;
+            font-weight: 100;
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
@@ -115,7 +120,7 @@
         <div class="email">
             <i><span data-th-text="${email}"></span></i>
             <br>
-            <a th:href="@{/Home/Logout}" class="btn btn-primary logout-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
+            <a th:href="@{/Home/Logout}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
         </div>
     </div>
     <br><br><br><br>

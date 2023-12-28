@@ -131,7 +131,6 @@ public class BookService {
         ResponseEntity<String> result = getRelevantBookData(input);
         String jsonString = result.getBody();
         
-
         //read data
         JsonReader jsonReader = Json.createReader(new StringReader(jsonString));
         JsonObject jsonMainObject = jsonReader.readObject();
@@ -223,10 +222,9 @@ public class BookService {
 
             book = new Book(title, isbn, authorListOfNames, description, thumbnail, categoryListInString, language);
             
-            if(!isbn.isEmpty()){
+            if(isbn !=null && !isbn.isEmpty()){
                 bookList.add(book);
             }
-            
         }
         return bookList;
     }
@@ -313,4 +311,3 @@ public class BookService {
 
 
 }
-
