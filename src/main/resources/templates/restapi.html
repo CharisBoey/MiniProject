@@ -44,11 +44,15 @@
             width: 900px;
             height: 600px;
             border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            display: flex; 
+            /* flex-direction: column;
+            text-align: justify;
+           justify-content: center;
+            align-items: center; */
             margin: 0 auto; 
+        }
+        .justifytext{
+            text-align: justify;
         }
         .darkblue-btn {
             background-color: #1A273E; 
@@ -111,7 +115,7 @@
             padding:25px 100px;
         }
 
-        .mediumblue-highlight {
+        /* .mediumblue-highlight {
             background-color: #576484;
             border-color: #576484; 
             color: #FFF;
@@ -123,7 +127,7 @@
             border-radius: 15px;
             padding:10px;
         }
-        
+         */
     </style>
 </head>
 <body>
@@ -139,15 +143,29 @@
     <br>
     <div class="background">
         <div class="normalheaders">
+            <br><br>
             <h1>Rest API Usage</h1>
-            <br>
-            <h3>Introduction</h3>
             
             <div class="description">
+                <p> This page is intended for developers who desire to write applications that interact with <span class="logo-edit"><u>InkIt.'s API</u></span></p>
+                
+                <h5 style="text-align: left;"><strong>Individual User Data: </strong></h5>
+                <div class="justifytext">
+                    <p>To extract an individual user's data, replace {email} will the email of the user. If link is used, you will be redirected to a page that ends with "%7Bemail%7D". Replace this value with the email of the user.</p>
+                </div>
+                <a href="https://vast-way-production.up.railway.app/Home/MyReadingListAPI/{email}" class="btn btn-primary darkblue-btn" >https://vast-way-production.up.railway.app/Home/MyReadingListAPI/{email}</a>
+
                 <br>
-                <p> This page is intended for developers who desire to write applications that interact with <strong><i>InkIt.'s API</i></strong><br> The following instructions will outline the steps required to extract data from InkIt.</p>
-                <h6 class="mediumblue-highlight">https://vast-way-production.up.railway.app/Home/MyReadingListJson/{email}</h6>
+                <h5 style="text-align: left;"><strong>All User Data: </strong></h5>
+                <div class="justifytext">
+                    <p>To extract all user's data, use the link shown below. Click to display Json data of all users.</p>
+                </div>
+                <a href="https://vast-way-production.up.railway.app/Home/MyReadingListAPI?q=*" class="btn btn-primary darkblue-btn" >https://vast-way-production.up.railway.app/Home/MyReadingListAPI?q=*</a>
+                
             </div>
         </div>
 </body>
 </html>
+
+<!-- <h6 class="mediumblue-highlight">https://vast-way-production.up.railway.app/Home/MyReadingListAPI/{email}</h6> 
+style="width:200px; height:35px;"-->

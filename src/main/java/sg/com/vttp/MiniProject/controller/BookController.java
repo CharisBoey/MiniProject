@@ -132,7 +132,7 @@ public class BookController {
         bookRepo.saveChosenBook(email, readingListBook);
         model.addAttribute("readingListBook", readingListBook);
         
-        return "redirect:/Home/MyReadingList"; 
+        return "redirect:/Home/SurpriseBook"; 
     }
 
     @GetMapping("/Update/{isbn}")
@@ -142,7 +142,7 @@ public class BookController {
         ReadingListBook rlb = bookRepo.getIndivSavReadingListBook(email, isbn);
         RatingAndComments ratingAndComments = new RatingAndComments();
         String retrievedRatingString = rlb.getRating();
-        System.out.println("00000000000000000000000000"+retrievedRatingString);
+        //System.out.println("00000000000000000000000000"+retrievedRatingString);
         String[] retrievedRating = retrievedRatingString.trim().split(" ");
         Double rating;
         if (retrievedRating[0].equals("?")){

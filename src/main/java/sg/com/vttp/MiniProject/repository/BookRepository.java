@@ -92,12 +92,12 @@ public class BookRepository {
 
     public Set<String> getAllEmailKeys(String queryString){
         Set<String> allKeys = readingListTemplate.keys(queryString);
-        Set<String> filteredKeys = new HashSet();
+        Set<String> filteredKeys = new HashSet<String>();
 
         for (String key:allKeys){
-            System.out.println("llllllllllllllllllllllllllllllllllll"+key);
+            //System.out.println("llllllllllllllllllllllllllllllllllll"+key);
             String substring = key.substring((key.length()-4),key.length());
-            System.out.println("--------------------------"+substring);
+            //System.out.println("--------------------------"+substring);
                 if (substring.contains("book")){
                     continue;
                 } else {
