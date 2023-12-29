@@ -32,7 +32,7 @@ public class BookRestController {
     @Autowired
     BookRepository bookRepo;
 
-    @GetMapping(path="/MyReadingListAPI/{email}", produces ="application/json")
+    @GetMapping(path="/InkItAPI/{email}", produces ="application/json")
     public ResponseEntity<String> getUserReadingList(@PathVariable(name = "email") String email){
         
         List<ReadingListBook> readingList = bookRepo.getSavedReadingListBooks(email);
@@ -81,7 +81,7 @@ public class BookRestController {
 
 
 
-    @GetMapping(path = "/MyReadingListAPI", produces = "application/json")
+    @GetMapping(path = "/InkItAPI", produces = "application/json")
     public ResponseEntity<String> getAll(@RequestParam Map<String, String> params) {
         String queryString = params.getOrDefault("q", "*");
 
