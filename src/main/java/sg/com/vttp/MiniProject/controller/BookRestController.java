@@ -1,46 +1,45 @@
 package sg.com.vttp.MiniProject.controller;
 
-import java.util.LinkedList;
+import java.io.StringReader;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
+
 
 import jakarta.json.Json;
+import jakarta.json.JsonArray;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
-import jakarta.servlet.http.HttpSession;
-import sg.com.vttp.MiniProject.model.Book;
+import jakarta.json.JsonReader;
 import sg.com.vttp.MiniProject.model.ReadingListBook;
 import sg.com.vttp.MiniProject.repository.BookRepository;
-import sg.com.vttp.MiniProject.service.BookService;
 
 @RestController
-@RequestMapping(path="/Home", produces ="application/json")
+@RequestMapping(path="/Home")
 public class BookRestController {
 
     @Autowired
     BookRepository bookRepo;
 
-    @GetMapping("/MyReadingListJson/{email}")
+    @GetMapping(path="/MyReadingListJson/{email}", produces ="application/json")
     public ResponseEntity<String> getUserReadingList(@PathVariable(name = "email") String email){
         
         List<ReadingListBook> readingList = bookRepo.getSavedReadingListBooks(email);
 
         JsonObjectBuilder userBuilder = Json.createObjectBuilder();
         userBuilder.add("email", email);
+        userBuilder.add("items", readingList.size());
 
         JsonObjectBuilder indivBookBuilder = Json.createObjectBuilder();
         JsonArrayBuilder readingListBuilder = Json.createArrayBuilder();
@@ -61,15 +60,93 @@ public class BookRestController {
         } 
         
 
-        JsonObjectBuilder userDataBuilder = Json.createObjectBuilder();
-        userDataBuilder.add("myReadingList", readingListBuilder);
-
-        userBuilder.add("data", userDataBuilder);
+        userBuilder.add("myReadingList", readingListBuilder);
 
         JsonObject resp = userBuilder.build();
         
         return ResponseEntity.ok(resp.toString());
 
+    }
+
+   /*  System.out.println(";;;;;;;;;;;;;;;;;;;;;;;;"+ readingListTemplate.keys("*"));
+		Set<String> keys = readingListTemplate.keys("*");
+		for (String key: keys){
+		List<ReadingListBook> readingList = bookRepo.getSavedReadingListBooks(key);
+			for(ReadingListBook rlb: readingList){
+				System.out.println(rlb.getAuthors());
+				System.out.println(rlb.getTitle());
+			}
+		} */
+
+
+
+
+    @GetMapping(path = "/MyReadingListJson", produces = "application/json")
+    public ResponseEntity<String> getAll(@RequestParam Map<String, String> params) {
+        String queryString = params.getOrDefault("q", "*");
+
+        Set<String> allEmailKeys = bookRepo.getAllEmailKeys(queryString);
+        
+        JsonArrayBuilder allArrayBuilder = Json.createArrayBuilder();
+
+        for (String key: allEmailKeys){
+
+
+            List<ReadingListBook> readingList = bookRepo.getSavedReadingListBooks(key);
+
+            JsonObjectBuilder userBuilder = Json.createObjectBuilder();
+            userBuilder.add("email", key);
+            userBuilder.add("items", readingList.size());
+
+            JsonObjectBuilder indivBookBuilder = Json.createObjectBuilder();
+            JsonArrayBuilder readingListBuilder = Json.createArrayBuilder();
+
+            for (ReadingListBook rlb: readingList){
+                indivBookBuilder.add("title", rlb.getTitle());
+                indivBookBuilder.add("isbn", rlb.getIsbn());
+                indivBookBuilder.add("authors", rlb.getAuthors());
+                indivBookBuilder.add("description", rlb.getDescription());
+                indivBookBuilder.add("thumbnail", rlb.getThumbnail());
+                indivBookBuilder.add("category", rlb.getCategory());
+                indivBookBuilder.add("language", rlb.getLanguage());
+                indivBookBuilder.add("rating", rlb.getRating());
+                indivBookBuilder.add("comments", rlb.getComments());
+                indivBookBuilder.add("completed", rlb.getCompleted());
+                
+                readingListBuilder.add(indivBookBuilder);
+            } 
+            
+
+            userBuilder.add("myReadingList", readingListBuilder);
+            
+            JsonObject user = userBuilder.build();
+            allArrayBuilder.add(user);
+        }
+
+        JsonArray allUsersResp = allArrayBuilder.build();
+    
+        return ResponseEntity.ok(allUsersResp.toString());
+
+    }
+
+    @PostMapping(consumes = "application/json")
+    public ResponseEntity<String> postAsJson(@RequestBody String payload) {
+        JsonReader jsonReader = Json.createReader(new StringReader(payload));
+        JsonObject mainData = jsonReader.readObject();
+        System.out.printf(">>> data = %s\n", mainData.toString());
+
+        String email = mainData.getString("email");
+
+        JsonArray myReadingListArray = mainData.getJsonArray("myReadingList");
+
+        JsonObject resp = Json.createObjectBuilder()
+            .add("status", "modified")
+            .add("items", myReadingListArray.size())
+            .build();
+
+        return ResponseEntity.status(201)
+            .header("my header", email)
+            .body(resp.toString());
     }
     
 }

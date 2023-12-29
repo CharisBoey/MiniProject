@@ -1,8 +1,10 @@
 package sg.com.vttp.MiniProject.repository;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
 
+import sg.com.vttp.MiniProject.model.RatingAndComments;
 import sg.com.vttp.MiniProject.model.ReadingListBook;
 
 @Repository
@@ -74,4 +77,36 @@ public class BookRepository {
         }
         return readingListBooks;
     }
+
+    public ReadingListBook getIndivSavReadingListBook(String email, String isbn){
+        HashOperations<String,String,Object> readingList = readingListTemplate.opsForHash();
+        ReadingListBook readingListBook = new ReadingListBook();
+        if(hasReadingList(email)){
+        
+            Map<String, Object> hashReadingListEntries = readingList.entries(email+"book");
+            readingListBook = (ReadingListBook) hashReadingListEntries.get(isbn);
+
+        }
+        return readingListBook;
+    }
+
+    public Set<String> getAllEmailKeys(String queryString){
+        Set<String> allKeys = readingListTemplate.keys(queryString);
+        Set<String> filteredKeys = new HashSet();
+
+        for (String key:allKeys){
+            System.out.println("llllllllllllllllllllllllllllllllllll"+key);
+            String substring = key.substring((key.length()-4),key.length());
+            System.out.println("--------------------------"+substring);
+                if (substring.contains("book")){
+                    continue;
+                } else {
+                    filteredKeys.add(key);
+                }
+        }
+        
+        
+        return filteredKeys;
+    }
+
 }

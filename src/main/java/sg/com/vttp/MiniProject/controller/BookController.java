@@ -137,10 +137,24 @@ public class BookController {
 
     @GetMapping("/Update/{isbn}")
     public String updateBook(@PathVariable("isbn") String isbn, Model model, HttpSession sess){
+        // RatingAndComments ratingAndComments = new RatingAndComments(); 
+        String email = (String) sess.getAttribute("email");
+        ReadingListBook rlb = bookRepo.getIndivSavReadingListBook(email, isbn);
         RatingAndComments ratingAndComments = new RatingAndComments();
+        String retrievedRatingString = rlb.getRating();
+        System.out.println("00000000000000000000000000"+retrievedRatingString);
+        String[] retrievedRating = retrievedRatingString.trim().split(" ");
+        Double rating;
+        if (retrievedRating[0].equals("?")){
+            rating = 0.00;
+        } else {
+            rating = Double.parseDouble(retrievedRating[0]);
+        }
+
+        ratingAndComments.setRating(rating);
+        ratingAndComments.setComments(rlb.getComments());
         model.addAttribute("ratingAndComments", ratingAndComments);
         
-        String email = (String) sess.getAttribute("email");
         model.addAttribute("email", email);
         model.addAttribute("isbn", isbn);
         return "update";
@@ -156,7 +170,7 @@ public class BookController {
         }
         
         
-        readingListBook.setRating(ratingAndComments.getRating().toString()+"/5");
+        readingListBook.setRating(ratingAndComments.getRating().toString()+" /5");
         readingListBook.setComments(ratingAndComments.getComments());
         if (ratingAndComments.getCompleted().equals("true")){
             readingListBook.setCompleted(true);
@@ -199,6 +213,12 @@ public class BookController {
     public String credits(){
 
         return "credits";
+    }
+
+    @GetMapping("/RestAPI")
+    public String restAPI(){
+
+        return "restapi";
     }
 
 }

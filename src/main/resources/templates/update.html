@@ -141,7 +141,7 @@
                     </td>
                     <td>
                         <input type="number" step=".01" id="rating" style="width: 35em"
-                                placeholder="Please type in your rating" data-th-field="*{rating}" >
+                                placeholder="*{rating}" data-th-field="*{rating}" >
                         <div class="btn-btn-primary mediumblue-btn" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></div>
                     </td>
                 </tr>
@@ -156,7 +156,7 @@
                         <label for="comments">Comments:</label>
                     </td>
                     <td>
-                        <textarea placeholder="Please type in your comments" name="comments"  style="width: 35em" rows="8"></textarea>
+                        <textarea name="comments"  style="width: 35em" rows="8" data-th-text="*{comments}"></textarea>
                         <!-- <input type="comments" id="comments" style="width: 16.5em" 
                                 placeholder="Please type in your comments" data-th-field="*{comments}">
                         <div class="btn-btn-primary mediumblue-btn" th:if="${#fields.hasErrors('comments')}" th:errors="*{comments}"></div> -->
@@ -170,7 +170,7 @@
                     </td>
                     <td class="stylecenter">
                         <input type="radio" name="finished" value="true" data-th-field="*{completed}" >Yes &nbsp&nbsp&nbsp
-                        <input type="radio" name="finished"checked="checked" value="false"data-th-field="*{completed}" >No
+                        <input type="radio" name="finished" checked="checked" value="false" data-th-field="*{completed}" >No
 
                         <div class="btn-btn-primary mediumblue-btn" th:if="${#fields.hasErrors('completed')}" th:errors="*{completed}"></div>
                     </td>
