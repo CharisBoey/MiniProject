@@ -53,6 +53,7 @@ public class BookRestController {
             indivBookBuilder.add("thumbnail", rlb.getThumbnail());
             indivBookBuilder.add("category", rlb.getCategory());
             indivBookBuilder.add("language", rlb.getLanguage());
+            indivBookBuilder.add("infoLink", rlb.getInfoLink());
             indivBookBuilder.add("rating", rlb.getRating());
             indivBookBuilder.add("comments", rlb.getComments());
             indivBookBuilder.add("completed", rlb.getCompleted());
@@ -98,6 +99,7 @@ public class BookRestController {
                 indivBookBuilder.add("thumbnail", rlb.getThumbnail());
                 indivBookBuilder.add("category", rlb.getCategory());
                 indivBookBuilder.add("language", rlb.getLanguage());
+                indivBookBuilder.add("infoLink", rlb.getInfoLink());
                 indivBookBuilder.add("rating", rlb.getRating());
                 indivBookBuilder.add("comments", rlb.getComments());
                 indivBookBuilder.add("completed", rlb.getCompleted());

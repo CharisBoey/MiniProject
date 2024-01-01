@@ -172,6 +172,48 @@
         .description::-webkit-scrollbar-track {
             background-color: #D5E3EE; 
         }
+
+        /* https://www.w3schools.com/howto/howto_js_snackbar.asp */
+        #snackbar {
+        visibility: hidden; 
+        min-width: 250px; 
+        margin-left: -125px;
+        background-color: #1A273E;
+        color: #fff; 
+        text-align: center; 
+        border-radius: 2px; 
+        padding: 16px; 
+        position: fixed;
+        z-index: 1; 
+        left: 50%;
+        bottom: 30px; 
+        }
+
+        #snackbar.show {
+        visibility: visible; 
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 1.5s;
+        animation: fadein 0.5s, fadeout 0.5s 1.5s;
+        }
+
+        @-webkit-keyframes fadein {
+        from {bottom: 0; opacity: 0;}
+        to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+        from {bottom: 0; opacity: 0;}
+        to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+        from {bottom: 30px; opacity: 1;}
+        to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+        from {bottom: 30px; opacity: 1;}
+        to {bottom: 0; opacity: 0;}
+        }
         
     </style>
 </head>
@@ -239,14 +281,14 @@
             </div>
             <div class="panel-view">
                 <div class="panel-item" data-th-each="book: ${bookList}">
-                    <a data-th-href="@{/Home/Save/Search/{isbn}(isbn=${book.isbn})}" class="btn btn-primary mediumblue-btn">Add to Reading List</a>
+                    <a onclick="snackbar()" data-th-href="@{/Home/Save/Search/{isbn}(isbn=${book.isbn})}" class="btn btn-primary mediumblue-btn" >Add to Reading List</a>
                 
                     <br>
                     <div class="title">
                         <h5 data-th-text="*{book.title}"></h5>
                     </div>
                     <div>
-                        <a data-th-href="*{book.infoLink}"><img data-th-src="*{book.thumbnail}" width="125px"></a>
+                        <a data-th-href="*{book.infoLink}" target="_blank"><img data-th-src="*{book.thumbnail}" width="125px"></a>
                     </div>
 
                     <br>
@@ -273,5 +315,18 @@
             </div>
         </div>
     </div>
+
+    <div id="snackbar">Book Successfully Added...</div>
+
+    <script>
+        function snackbar() {
+          var x = document.getElementById("snackbar");
+          x.className = "show";
+          setTimeout(function(){ 
+            window.location.href = '/Home/Save/Search/{isbn}(isbn=${book.isbn})';
+            x.className = x.className.replace("show", ""); }, 3000);
+        }
+    </script>
+
 </body>
 </html>
