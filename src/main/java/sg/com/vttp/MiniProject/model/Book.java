@@ -17,4 +17,5 @@ public class Book {
     private String thumbnail;
     private String category;
     private String language;
+    private String infoLink;
 }

@@ -25,7 +25,6 @@
             padding: 20px 60px;
             
         }
-        
 
         .darkblue-btn {
             background-color: #1A273E; 
@@ -50,6 +49,7 @@
             text-align: center;
             font-weight: bold;
         }
+
         .yellow-btn {
             background-color: #F1A81A;
             border-color: #F1A81A; 
@@ -61,6 +61,7 @@
             text-align: center;
             font-weight: bold;
         }
+
         .mini-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
@@ -73,6 +74,7 @@
             font-weight: bold;
             font-size: 10px;
         }
+
         .btn:hover {
             /* background-color: #6E737E; 
             border-color:#6E737E;
@@ -88,6 +90,7 @@
             font-weight: bolder;
             margin: 0;
         }
+
         .normalheaders{
             font-family: Montserrat;
             color: #1F273A;
@@ -99,26 +102,15 @@
             font-size: 20px;
         }
 
-        /* .table {
-        table-layout: fixed;
-        width: 100%;
-            
-        } */
-        /* .largercol {
-        width: 40%; 
-        }
-
-        .smallercol {
-        width: 20%;
-        } */
-
         .tablecentered{
             text-align: center;
             /* padding: 10px 75px; */
         }
+
         .styleright{
             text-align: right;
         }
+
         .stylecenter{
             text-align: center;
         }
@@ -135,7 +127,7 @@
         <div class="email">
             <i><span data-th-text="${email}"></span></i>
             <br>
-            <a th:href="@{/Home/Logout}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
+            <a data-th-href="@{/Home/Logout}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
         </div>
     </div>
     
@@ -196,8 +188,9 @@
                                 <strong>Author(s):</strong> <span data-th-text="*{book.authors}"></span>
                             </p>
                             <div class="tablecentered">
-                                <img data-th-src="*{book.thumbnail}" width="150px">
+                                <a data-th-href="*{book.infoLink}"><img data-th-src="*{book.thumbnail}" width="150px"></a>
                             </div>
+
                             <p>
                                 <strong>ISBN:</strong> <span data-th-text="*{book.isbn}"></span>
                             </p>
@@ -225,17 +218,11 @@
                         <td class="col-lg-3">
                             
                             <br>
-                            <a th:href="@{/Home/Update/{isbn}(isbn=${book.isbn})}" class="btn btn-primary mediumblue-btn" style="width: 230px; height: 50px;">Update</a>
+                            <a data-th-href="@{/Home/Update/{isbn}(isbn=${book.isbn})}" class="btn btn-primary mediumblue-btn" style="width: 230px; height: 50px;">Update</a>
                             <br>
-                            <a th:href="@{/Home/Delete/{isbn}(isbn=${book.isbn})}" class="btn btn-primary yellow-btn" style="width: 230px;height: 50px">Delete</a>
+                            <a data-th-href="@{/Home/Delete/{isbn}(isbn=${book.isbn})}" class="btn btn-primary yellow-btn" style="width: 230px;height: 50px">Delete</a>
 
                         </td>
-                        <!-- <td>
-                            <a th:href="@{/employees/employeeupdate/{email}(email=${emp.email})}" class="btn btn-secondary">Update</a>
-                            <a th:href="@{/employees/employeedelete/{email}(email=${emp.email})}" class="btn btn-danger">Delete</a>
-                        </td> -->
-                        
-                        
                     </tr>
                 </tbody>
             </table> 

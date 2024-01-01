@@ -24,12 +24,13 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 60px;
-            
         }
+
         .h1 {
             font-family: "Lobster", sans-serif;
             margin: 0;
         }
+
         .normalheaders{
             font-family: Montserrat;
             color: #1F273A;
@@ -46,6 +47,7 @@
             align-items: center;
             margin: 0 auto; 
         }
+
         .darkblue-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
@@ -56,8 +58,8 @@
             align-items: center;
             text-align: center;
             margin: 0 auto;
-            
         }
+
         .mini-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
@@ -81,34 +83,36 @@
             text-align: center;
             font-style: italic;
         }
+
         .btn:hover {
-            /* background-color: #6E737E; 
-            border-color:#6E737E;
-            color: #FFF;   */
             background-color: #FFF; 
             border-color:#1F273A;
             color: #1F273A;
             font-weight: bold;
         }
+
         .styleleft{
             text-align: left;
         }
+
         .stylecenter{
             display:flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            
         }
+
         .buttonheader {
             display: flex;
             margin-left: 90%;
         }
+
         .email {
             text-align: right;
             font-weight: 100;
             font-size: 20px;
         }
+
     </style>
 </head>
 <body>
@@ -120,13 +124,13 @@
         <div class="email">
             <i><span data-th-text="${email}"></span></i>
             <br>
-            <a th:href="@{/Home/Logout}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
+            <a data-th-href="@{/Home/Logout}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
         </div>
     </div>
     <br><br><br><br>
     <div class="background">
         <div class="buttonheader">
-            <a th:href="@{/Home/MyReadingList}"><img src="/close.png" height="20"></a>
+            <a data-th-href="@{/Home/MyReadingList}"><img src="/close.png" height="20"></a>
         </div>
         <div class="normalheaders">
             <h1>Update Reading List</h1>
@@ -142,7 +146,7 @@
                     <td>
                         <input type="number" step=".01" id="rating" style="width: 35em"
                                 placeholder="*{rating}" data-th-field="*{rating}" >
-                        <div class="btn-btn-primary mediumblue-btn" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></div>
+                        <div class="btn-btn-primary mediumblue-btn" data-th-if="${#fields.hasErrors('rating')}" data-th-errors="*{rating}"></div>
                     </td>
                 </tr>
                 <tr>
@@ -157,10 +161,6 @@
                     </td>
                     <td>
                         <textarea name="comments"  style="width: 35em" rows="8" data-th-text="*{comments}"></textarea>
-                        <!-- <input type="comments" id="comments" style="width: 16.5em" 
-                                placeholder="Please type in your comments" data-th-field="*{comments}">
-                        <div class="btn-btn-primary mediumblue-btn" th:if="${#fields.hasErrors('comments')}" th:errors="*{comments}"></div> -->
-                    
                     </td>
                     
                 </tr>
@@ -172,7 +172,7 @@
                         <input type="radio" name="finished" value="true" data-th-field="*{completed}" >Yes &nbsp&nbsp&nbsp
                         <input type="radio" name="finished" checked="checked" value="false" data-th-field="*{completed}" >No
 
-                        <div class="btn-btn-primary mediumblue-btn" th:if="${#fields.hasErrors('completed')}" th:errors="*{completed}"></div>
+                        <div class="btn-btn-primary mediumblue-btn" data-th-if="${#fields.hasErrors('completed')}" data-th-errors="*{completed}"></div>
                     </td>
                 </tr>
                 

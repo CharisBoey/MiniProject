@@ -9,7 +9,7 @@
     <title>Document</title>
 
     <style>
-         body {
+        body {
             font-family:Montserrat;
             margin: 0;
             padding: 0;
@@ -74,9 +74,6 @@
             font-weight: bold;
         }
         .btn:hover {
-            /* background-color: #6E737E; 
-            border-color:#6E737E;
-            color: #FFF;   */
             background-color: #FFF; 
             border-color:#1F273A;
             color: #1F273A;
@@ -88,6 +85,7 @@
             font-weight: bolder;
             margin: 0;
         }
+
         .normalheaders{
             font-family: Montserrat;
             color: #1F273A;
@@ -99,33 +97,16 @@
             font-size: 20px;
         }
 
-        
-
-        /* .table {
-        table-layout: fixed;
-        width: 100%;
-            
-        } */
-        /* .largercol {
-        width: 40%; 
-        }
-
-        .smallercol {
-        width: 20%;
-        } */
-
         .tablecentered{
             text-align: center;
-            /* padding: 10px 75px; */
         }
-        /* Apply a grid layout */
+        
         .panel-view {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
         gap: 20px;
         }
 
-        /* Style each panel item */
         .panel-item {
         border: 1px solid #EDF5FB;
         padding: 15px;
@@ -134,26 +115,20 @@
         }
 
         .panel-item h5 {
-        height: 75px; /* Set a fixed height */
+        height: 75px; 
         font-family: Montserrat;
         font-weight: bold;
         }
 
         .panel-item img {
-        height: 235px; /* Set a fixed height for the images */
+        height: 235px; 
         width: 165px;
-        object-fit: contain; /* Maintain aspect ratio and cover the container */
+        object-fit: contain; 
         background-color: #FFF;
-        border: 10px solid #FFF; /* Add a border with the desired color */
+        border: 10px solid #FFF; 
         border-radius: 5px;
         }
 
-        /* .description{
-            text-align: justify;
-            overflow:auto;
-            text-overflow: ellipsis; 
-            height: 150px; 
-        } */
         .title {
             text-align: center;
             overflow: auto;
@@ -163,20 +138,18 @@
             padding:10px;
         }
 
-        /* For WebKit browsers (Chrome, Safari) */
         .title::-webkit-scrollbar {
             width: 10px;
         }
 
         .title::-webkit-scrollbar-thumb {
-            background-color: #1A273E; /* Color of the thumb */
-            border-radius: 5px; /* Rounded corners of the thumb */
+            background-color: #1A273E; 
+            border-radius: 5px;
         }
 
         .title::-webkit-scrollbar-track {
-            background-color: #D5E3EE; /* Color of the track */
+            background-color: #D5E3EE; 
         }
-
 
         .description {
             text-align: justify;
@@ -187,25 +160,23 @@
             padding:10px
         }
 
-        /* For WebKit browsers (Chrome, Safari) */
         .description::-webkit-scrollbar {
             width: 10px;
         }
 
         .description::-webkit-scrollbar-thumb {
-            background-color: #1A273E; /* Color of the thumb */
-            border-radius: 5px; /* Rounded corners of the thumb */
+            background-color: #1A273E; 
+            border-radius: 5px; 
         }
 
         .description::-webkit-scrollbar-track {
-            background-color: #D5E3EE; /* Color of the track */
+            background-color: #D5E3EE; 
         }
         
     </style>
 </head>
 
 <body>
-
 
     <div class="topborder">
         <div class="h1">
@@ -215,17 +186,15 @@
         <div>
             <i><span class="email" data-th-text="${email}"></span></i>
             <br>
-            <a th:href="@{/Home/Logout}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
+            <a data-th-href="@{/Home/Logout}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
             
         </div>
         
     </div>
-    
-
 
     <div class="container">
         <br>
-        <a th:href="@{/Home/MyReadingList}" class="btn btn-primary yellow-btn" style="width:215px; margin-left: auto;">My Reading List</a>
+        <a data-th-href="@{/Home/MyReadingList}" class="btn btn-primary yellow-btn" style="width:215px; margin-left: auto;">My Reading List</a>
         
         <div data-th-if="${#lists.isEmpty(bookList)}">
 
@@ -235,7 +204,7 @@
                 </div>
                 <div class="col-auto">
                 <input placeholder="Search by Book Title, Author or ISBN" type="text" name="input" id="input" class="form-control" size="120"/>
-                <!-- PROBLEM VALIDATE THAT INPUT IS NOT NULL BEFORE SEARCHING IF NOT GOT ERROR -->
+                
                 </div>
                 <div class="col-auto">
                 <button type="submit" class="btn btn-primary darkblue-btn" style="width: 215px;">Search</button>
@@ -246,14 +215,16 @@
             <h2><strong><img src="/openbook.png" height="40"> Empty Book List</strong></h2>
             <p>Please search for a book</p>
 		</div>
+
         <div data-th-unless="${#lists.isEmpty(bookList)}">
+            
             <form method="GET" data-th-action="@{/Home/Search}" class="row g-3 align-items-center">
                 <div class="normalheaders">
                     <h2><strong><label for="title" class="form-label"><img src="/magnifyingglass.png" height="40"> Search for books:</label></strong></h2>
                 </div>
                 <div class="col-auto">
                 <input placeholder="Search by Book Title, Author or ISBN" type="text" name="input" id="input" class="form-control" size="120"/>
-                <!-- PROBLEM VALIDATE THAT INPUT IS NOT NULL BEFORE SEARCHING IF NOT GOT ERROR -->
+                
                 </div>
                 <div class="col-auto">
                 <button type="submit" class="btn btn-primary darkblue-btn" style="width: 215px;">Search</button>
@@ -268,14 +239,16 @@
             </div>
             <div class="panel-view">
                 <div class="panel-item" data-th-each="book: ${bookList}">
-                    <a data-th-href="@{/Home/Save/{isbn}(isbn=${book.isbn})}" class="btn btn-primary mediumblue-btn">Add to Reading List</a>
+                    <a data-th-href="@{/Home/Save/Search/{isbn}(isbn=${book.isbn})}" class="btn btn-primary mediumblue-btn">Add to Reading List</a>
+                
                     <br>
                     <div class="title">
                         <h5 data-th-text="*{book.title}"></h5>
                     </div>
                     <div>
-                        <img data-th-src="*{book.thumbnail}" width="125px">
+                        <a data-th-href="*{book.infoLink}"><img data-th-src="*{book.thumbnail}" width="125px"></a>
                     </div>
+
                     <br>
                     <p>
                         <strong>Author(s):</strong> <span data-th-text="*{book.authors}"></span>
@@ -296,7 +269,6 @@
                     <p>
                         <strong>ISBN:</strong> <span data-th-text="*{book.isbn}"></span>
                     </p>
-                
                 </div>  
             </div>
         </div>

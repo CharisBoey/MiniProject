@@ -24,12 +24,13 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 60px;
-            
         }
+
         .h1 {
             font-family: "Lobster", sans-serif;
             margin: 0;
         }
+
         .normalheaders{
             font-family: Montserrat;
             color: #1F273A;
@@ -46,6 +47,7 @@
             align-items: center;
             margin: 0 auto; 
         }
+
         .darkblue-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
@@ -56,8 +58,8 @@
             align-items: center;
             text-align: center;
             margin: 0 auto;
-            
         }
+
         .mini-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
@@ -81,18 +83,18 @@
             text-align: center;
             font-style: italic;
         }
+
         .btn:hover {
-            /* background-color: #6E737E; 
-            border-color:#6E737E;
-            color: #FFF;   */
             background-color: #FFF; 
             border-color:#1F273A;
             color: #1F273A;
             font-weight: bold;
         }
+
         .styleleft{
             text-align: left;
         }
+
         .description {
             text-align: justify;
             overflow: auto;
@@ -102,30 +104,29 @@
             padding:25px 100px;
         }
 
-        /* For WebKit browsers (Chrome, Safari) */
         .description::-webkit-scrollbar {
             width: 10px;
         }
 
         .description::-webkit-scrollbar-thumb {
-            background-color: #1A273E; /* Color of the thumb */
-            border-radius: 5px; /* Rounded corners of the thumb */
+            background-color: #1A273E; 
+            border-radius: 5px;
         }
 
         .description::-webkit-scrollbar-track {
-            background-color: #D5E3EE; /* Color of the track */
+            background-color: #D5E3EE;
         }
 
         .imgbackground {
-        height: 235px; /* Set a fixed height for the images */
+        height: 235px;
         width: 165px;
-        object-fit: contain; /* Maintain aspect ratio and cover the container */
+        object-fit: contain; 
         display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
         background-color: #FFF;
-        border: 10px solid #FFF; /* Add a border with the desired color */
+        border: 10px solid #FFF; 
         border-radius: 5px;
         }
 
@@ -137,9 +138,6 @@
             margin-right : 650px;
         }
 
-        .alignright{
-
-        }
         .email {
             text-align: right;
             font-weight: 100;
@@ -157,18 +155,17 @@
         <div class="email">
             <i><span data-th-text="${email}"></span></i>
             <br>
-            <a th:href="@{/Home/Logout}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
+            <a data-th-href="@{/Home/Logout}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
             
         </div>
     </div>
     <br>
-    <!-- style="margin-right:75%;" -->
     <div class="background">
         <br>
         <div class="buttonheader">
-            <a data-th-href="@{/Home/Save/{isbn}(isbn=${surpriseBook.isbn})}" class="btn btn-primary mediumblue-btn alignment">Add to Reading List</a>
+            <a data-th-href="@{/Home/Save/SurpriseBook/{isbn}(isbn=${surpriseBook.isbn})}" class="btn btn-primary mediumblue-btn alignment">Add to Reading List</a>
     
-            <a th:href="@{/Home/SurpriseBook}"><img src="/refresh.png" height="25"></a>
+            <a data-th-href="@{/Home/SurpriseBook}"><img src="/refresh.png" height="25"></a>
         </div>
        
         
@@ -176,7 +173,7 @@
             <h5><strong><span data-th-text="*{surpriseBook.title}"></span></strong></h5>
         </div>
         <div class="imgbackground">
-            <img data-th-src="*{surpriseBook.thumbnail}" width="125px">
+            <a data-th-href="*{surpriseBook.infoLink}"><img data-th-src="*{surpriseBook.thumbnail}" width="125px"></a>
         </div>
         <br>
         <p>
@@ -200,7 +197,7 @@
         </p>
     </div>
     <div>
-        <a th:href="@{/Home/MyReadingList}" class="btn btn-primary darkblue-btn" style="width:200px; height:35px; margin-left: 85%;">Back to Reading List</a>
+        <a data-th-href="@{/Home/MyReadingList}" class="btn btn-primary darkblue-btn" style="width:200px; height:35px; margin-left: 85%;">Back to Reading List</a>
     </div>
 </body>
 </html>

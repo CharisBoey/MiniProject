@@ -10,7 +10,7 @@
 
     <style>
         body {
-            font-family:Montserrat;
+            font-family: Montserrat;
             margin: 0;
             padding: 0;
             color: #1A273E;
@@ -26,10 +26,12 @@
             padding: 20px 60px;
             
         }
+
         .h1 {
             font-family: "Lobster", sans-serif;
             margin: 0;
         }
+
         .normalheaders{
             font-family: Montserrat;
             color: #1F273A;
@@ -46,6 +48,7 @@
             align-items: center;
             margin: 0 auto; 
         }
+
         .darkblue-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
@@ -69,6 +72,7 @@
             text-align: center;
             font-style: italic;
         }
+
         .btn:hover{
             background-color: #576484;
             border-color: #576484; 
@@ -91,7 +95,7 @@
             <h1>Creating new account <span data-th-text="${email}"></span> </h1>
         </div>
         <br><br>
-        <a th:href="@{/Home/MyReadingList}" class="btn btn-primary darkblue-btn" style="width: 345px;" >Continue</a>
+        <a data-th-href="@{/Home/MyReadingList}" class="btn btn-primary darkblue-btn" style="width: 345px;" >Continue</a>
         
     </div>
 </body>

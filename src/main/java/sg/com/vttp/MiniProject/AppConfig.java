@@ -13,14 +13,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-// This is a configuration
 @Configuration
 public class AppConfig {
 
    private Logger logger = Logger.getLogger(AppConfig.class.getName());
 
-   // Inject the properties from application.properties 
-   // into the configuration
    @Value("${spring.redis.host}")
    private String redisHost;
 
@@ -38,12 +35,12 @@ public class AppConfig {
 
    @Bean("stringRedis")
    public RedisTemplate<String, String> createStringRedisConnection() {
-      // Create a redis configuration
+
       RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
       config.setHostName(redisHost);
       config.setPort(redisPort);
       config.setDatabase(redisDatabase);
-      // Only set the username and passwrd if they are set
+
       if (!"NOT_SET".equals(redisUser.trim())) {
          config.setUsername(redisUser);
          config.setPassword(redisPassword);
@@ -71,12 +68,12 @@ public class AppConfig {
    @Bean("objectRedis")
    //CHANGE TO STRING/OBJECT
    public RedisTemplate<String, Object> createObjectRedisConnection() {
-      // Create a redis configuration
+
       RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
       config.setHostName(redisHost);
       config.setPort(redisPort);
       config.setDatabase(redisDatabase);
-      // Only set the username and passwrd if they are set
+
       if (!"NOT_SET".equals(redisUser.trim())) {
          config.setUsername(redisUser);
          config.setPassword(redisPassword);
@@ -100,8 +97,7 @@ public class AppConfig {
       template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
       template.setHashKeySerializer(new StringRedisSerializer());
       template.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
-
-
+      
       return template;
    }
    

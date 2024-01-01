@@ -32,6 +32,7 @@ public class BookRestController {
     @Autowired
     BookRepository bookRepo;
 
+    //#RestAPI for individual data
     @GetMapping(path="/InkItAPI/{email}", produces ="application/json")
     public ResponseEntity<String> getUserReadingList(@PathVariable(name = "email") String email){
         
@@ -68,19 +69,7 @@ public class BookRestController {
 
     }
 
-   /*  System.out.println(";;;;;;;;;;;;;;;;;;;;;;;;"+ readingListTemplate.keys("*"));
-		Set<String> keys = readingListTemplate.keys("*");
-		for (String key: keys){
-		List<ReadingListBook> readingList = bookRepo.getSavedReadingListBooks(key);
-			for(ReadingListBook rlb: readingList){
-				System.out.println(rlb.getAuthors());
-				System.out.println(rlb.getTitle());
-			}
-		} */
-
-
-
-
+    //#RestAPI for all data
     @GetMapping(path = "/InkItAPI", produces = "application/json")
     public ResponseEntity<String> getAll(@RequestParam Map<String, String> params) {
         String queryString = params.getOrDefault("q", "*");
@@ -129,6 +118,7 @@ public class BookRestController {
 
     }
 
+    //#RestAPI new total no. of items
     @PostMapping(consumes = "application/json")
     public ResponseEntity<String> postAsJson(@RequestBody String payload) {
         JsonReader jsonReader = Json.createReader(new StringReader(payload));

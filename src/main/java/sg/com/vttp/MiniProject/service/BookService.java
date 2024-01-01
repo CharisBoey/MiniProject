@@ -40,7 +40,7 @@ public class BookService {
                     .build(false)
                     .toUriString();
                     
-        //System.out.println(url);
+        //System.out.println("URL!!!!!!!!!!!"+url);
         RequestEntity<Void> request = RequestEntity.get(url).build();
 
         RestTemplate template = new RestTemplate();
@@ -60,7 +60,7 @@ public class BookService {
         ResponseEntity<String> result = getRelevantBookData(input);
         String jsonString = result.getBody();
         
-        //read data
+        //~Read data
         JsonReader jsonReader = Json.createReader(new StringReader(jsonString));
         JsonObject jsonMainObject = jsonReader.readObject();
         JsonArray jsonArrayItemsInMain = jsonMainObject.getJsonArray("items");
@@ -68,13 +68,13 @@ public class BookService {
         for(JsonValue item: jsonArrayItemsInMain){
             JsonObject jsonObjectIndivBook = (JsonObject) item;
 
-            //Go into the Object
+            //~Go into the Object
             JsonObject jsonObjectVolumeInfo = jsonObjectIndivBook.getJsonObject("volumeInfo");
 
-            //Get Book Title
+            //~Get Book Title
             String title = jsonObjectVolumeInfo.getString("title", "No Title");
 
-            //Get Book Authors List
+            //~Get Book Authors List
             JsonArray authors = jsonObjectVolumeInfo.getJsonArray("authors");  
             String authorListOfNames="";
             if (authors != null) {
@@ -88,10 +88,10 @@ public class BookService {
                 authorListOfNames="Anonymous";
             }
 
-            //Get Book Description
+            //~Get Book Description
             String description = jsonObjectVolumeInfo.getString("description", "No Description");
-            
-            //Get Book ISBN
+
+            //~Get Book ISBN
             JsonArray isbnVersions = jsonObjectVolumeInfo.getJsonArray("industryIdentifiers"); 
             String isbn10 = "";
             String isbn13 = "";
@@ -119,7 +119,7 @@ public class BookService {
             }
 
             
-            //Get Book Image
+            //~Get Book Image
             JsonObject imageLinkObject = jsonObjectVolumeInfo.getJsonObject("imageLinks");
             String thumbnail="";
 
@@ -129,7 +129,7 @@ public class BookService {
                 thumbnail = "https://i.pinimg.com/originals/ed/d9/65/edd96521e8ca8975196b224a9c1cea6c.jpg";
             }
 
-            //Get Book Category List (Normal list is also used if you wanna display one way)
+            //~Get Book Category List (Normal list is also used if you wanna display one way)
             JsonArray categories = jsonObjectVolumeInfo.getJsonArray("categories");
             List<String> categoryList = new LinkedList<>();
             String categoryListInString = "";
@@ -146,10 +146,11 @@ public class BookService {
                 categoryListInString="No Category";
             }
 
-            //Get Book Language
+            //~Get Book Language
             String language = jsonObjectVolumeInfo.getString("language", "No Language Specified");
 
-            book = new Book(title, isbn, authorListOfNames, description, thumbnail, categoryListInString, language);
+            String infoLink = jsonObjectVolumeInfo.getString("infoLink","https://play.google.com/store/books");
+            book = new Book(title, isbn, authorListOfNames, description, thumbnail, categoryListInString, language, infoLink);
             
             if(isbn !=null && !isbn.isEmpty()){
                 bookList.add(book);
@@ -168,7 +169,8 @@ public class BookService {
             originalToSaveBook.getDescription(), 
             originalToSaveBook.getThumbnail(), 
             originalToSaveBook.getCategory(), 
-            originalToSaveBook.getLanguage(), 
+            originalToSaveBook.getLanguage(),
+            originalToSaveBook.getInfoLink(), 
             " ? "+"/5", 
             "...", false);
 
@@ -176,7 +178,7 @@ public class BookService {
     }
 
     public Book getSurpriseBook(){
-        //get random index
+        //~Get random index
         ResponseEntity<String> randomResult = getRelevantBookData("*");
         String randomJsonString = randomResult.getBody();
         JsonReader randomJsonReader = Json.createReader(new StringReader(randomJsonString));
@@ -197,7 +199,7 @@ public class BookService {
 
         while(notfound){
     
-            //get isbn related to random index
+            //~Get isbn related to random index
             JsonArray jsonArrayItemsInMain = jsonMainObject.getJsonArray("items");
             JsonObject surpriseBook = (JsonObject) jsonArrayItemsInMain.get(0);
             JsonObject jsonObjectVolumeInfo = surpriseBook.getJsonObject("volumeInfo");
@@ -237,6 +239,4 @@ public class BookService {
         
         return surpriseBook;
     }
-
-
 }

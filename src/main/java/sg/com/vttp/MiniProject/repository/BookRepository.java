@@ -13,7 +13,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
 
-import sg.com.vttp.MiniProject.model.RatingAndComments;
 import sg.com.vttp.MiniProject.model.ReadingListBook;
 
 @Repository
@@ -25,7 +24,7 @@ public class BookRepository {
     @Autowired @Qualifier("objectRedis")
     private RedisTemplate<String, Object> readingListTemplate;
 
-    //REDIS USER 
+    //#REDIS LOGIN USER ----------------------------------START----------------------------------
     public void saveUser(String email, String password){
         ValueOperations<String, String> user = loginTemplate.opsForValue();
         user.set(email, password);
@@ -48,9 +47,10 @@ public class BookRepository {
         
         return false;
     }
+    //#REDIS LOGIN USER -----------------------------------END-----------------------------------
 
 
-    //REDIS READINGLIST FOR USER 
+    //#REDIS READINGLIST FOR USER  ----------------------------------START----------------------------------
     public void saveChosenBook(String email, ReadingListBook ReadingListBook){
         HashOperations<String, String, Object> chosenBookList = readingListTemplate.opsForHash();
         chosenBookList.put(email+"book", ReadingListBook.getIsbn(), ReadingListBook);
@@ -64,6 +64,7 @@ public class BookRepository {
         readingListTemplate.opsForHash().delete(email+"book", ReadingListBook.getIsbn());
     }
 
+    //#All books
     public List<ReadingListBook> getSavedReadingListBooks(String email){
         HashOperations<String,String,Object> readingList = readingListTemplate.opsForHash();
         List<ReadingListBook> readingListBooks = new LinkedList<>();
@@ -78,6 +79,7 @@ public class BookRepository {
         return readingListBooks;
     }
 
+    //#One book
     public ReadingListBook getIndivSavReadingListBook(String email, String isbn){
         HashOperations<String,String,Object> readingList = readingListTemplate.opsForHash();
         ReadingListBook readingListBook = new ReadingListBook();
@@ -85,7 +87,6 @@ public class BookRepository {
         
             Map<String, Object> hashReadingListEntries = readingList.entries(email+"book");
             readingListBook = (ReadingListBook) hashReadingListEntries.get(isbn);
-
         }
         return readingListBook;
     }
@@ -93,9 +94,9 @@ public class BookRepository {
     public Set<String> getAllEmailKeys(String queryString){
         Set<String> allKeys = readingListTemplate.keys(queryString);
         Set<String> filteredKeys = new HashSet<String>();
-
+        //Prevent information from login to be displayed
         for (String key:allKeys){
-            //System.out.println("llllllllllllllllllllllllllllllllllll"+key);
+            //System.out.println("KEY!!!!!"+key);
             String substring = key.substring((key.length()-4),key.length());
             //System.out.println("--------------------------"+substring);
                 if (substring.contains("book")){
@@ -104,9 +105,7 @@ public class BookRepository {
                     filteredKeys.add(key);
                 }
         }
-        
-        
         return filteredKeys;
     }
-
+    //#REDIS READINGLIST FOR USER -----------------------------------END-----------------------------------
 }

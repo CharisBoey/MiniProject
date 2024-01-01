@@ -24,16 +24,18 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 60px;
-            
         }
+
         .h1 {
             font-family: "Lobster", sans-serif;
             margin: 0;
         }
+
         .logo-edit {
             font-family: "Lobster", sans-serif;
             font-size:20px;
         }
+
         .normalheaders{
             font-family: Montserrat;
             color: #1F273A;
@@ -45,15 +47,13 @@
             height: 600px;
             border-radius: 20px;
             display: flex; 
-            /* flex-direction: column;
-            text-align: justify;
-           justify-content: center;
-            align-items: center; */
             margin: 0 auto; 
         }
+
         .justifytext{
             text-align: justify;
         }
+
         .darkblue-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
@@ -64,8 +64,8 @@
             align-items: center;
             text-align: center;
             margin: 0 auto;
-            
         }
+
         .mediumblue-btn {
             background-color: #576484;
             border-color: #576484; 
@@ -76,6 +76,7 @@
             text-align: center;
             font-style: italic;
         }
+
         .mini-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
@@ -88,46 +89,32 @@
             font-weight: bold;
             font-size: 10px;
         }
+
         .btn:hover {
-            /* background-color: #6E737E; 
-            border-color:#6E737E;
-            color: #FFF;   */
             background-color: #FFF; 
             border-color:#1F273A;
             color: #1F273A;
             font-weight: bold;
         }
+
         .styleleft{
             text-align: left;
         }
+
         .styleforminputright{
             display: flex;
             justify-content: flex-end;
             align-items: center;
         }
+
         .description {
-            /* display:flex; */
             justify-content: center;
             align-items: center;
             text-align: center;
             height: 100px;
-            /* scrollbar-width: thin; */
             padding:25px 100px;
         }
 
-        /* .mediumblue-highlight {
-            background-color: #576484;
-            border-color: #576484; 
-            color: #FFF;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            font-style: italic;
-            border-radius: 15px;
-            padding:10px;
-        }
-         */
     </style>
 </head>
 <body>
@@ -137,7 +124,7 @@
             </h1>
         </div>
         <div>
-            <a th:href="@{/Home/Login}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Login</a>
+            <a data-th-href="@{/Home/Login}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Login</a>
         </div>
     </div>
     <br>
@@ -166,6 +153,3 @@
         </div>
 </body>
 </html>
-
-<!-- <h6 class="mediumblue-highlight">https://vast-way-production.up.railway.app/Home/MyReadingListAPI/{email}</h6> 
-style="width:200px; height:35px;"-->

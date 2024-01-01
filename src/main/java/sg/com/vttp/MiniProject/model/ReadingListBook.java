@@ -17,6 +17,7 @@ public class ReadingListBook {
     private String thumbnail;
     private String category;
     private String language;
+    private String infoLink;
     private String rating;
     private String comments;
     private Boolean completed;

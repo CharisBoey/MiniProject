@@ -23,13 +23,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 60px;
-            
+            padding: 20px 60px; 
         }
+
         .h1 {
             font-family: "Lobster", sans-serif;
             margin: 0;
         }
+
         .normalheaders{
             font-family: Montserrat;
             color: #1F273A;
@@ -46,6 +47,7 @@
             align-items: center;
             margin: 0 auto; 
         }
+
         .darkblue-btn {
             background-color: #1A273E; 
             border-color:#1A273E;
@@ -69,6 +71,7 @@
             text-align: center;
             font-style: italic;
         }
+
         .btn:hover{
             background-color: #576484;
             border-color: #576484; 
@@ -88,7 +91,6 @@
             font-size: 10px;
         }
         
-        
     </style>
 </head>
 <body>
@@ -98,7 +100,7 @@
             </h1>
         </div>
         <div>
-            <a th:href="@{/Home/Login}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Login</a>
+            <a data-th-href="@{/Home/Login}" class="btn btn-primary mini-btn" style="width:75px; height:20px; margin-left: auto;">Login</a>
         </div>
     </div>
     
