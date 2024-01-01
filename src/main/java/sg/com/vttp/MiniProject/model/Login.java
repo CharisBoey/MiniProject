@@ -19,8 +19,7 @@ public class Login {
     @NotEmpty(message="Email must be filled in")
     private String email;
 
-    @Pattern(regexp="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$", message=" Minimum eight characters, at least 1 uppercase, 1 lowercase & 1 digit ")
-    @Size(min=8, message="Password must be at least 8 characters")
-    @NotEmpty(message="Email must be filled in")
+    @Pattern(regexp="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$", message=" Min 8 characters, at least 1 uppercase, 1 lowercase & 1 digit ")
+    @NotEmpty(message="Password must be filled in")
     private String password;
 }
