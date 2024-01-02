@@ -23,11 +23,10 @@
             <a data-th-href="@{/Home/Logout}" class="btn mini-btn" style="width:75px; height:20px; margin-left: auto;">Log out</a>
             
         </div>
-        
     </div>
 
     <div class="container">
-        <br>
+        <br><br>
         <a data-th-href="@{/Home/MyReadingList}" class="btn yellow-btn" style="width:215px; margin-left: auto;">My Reading List</a>
         
         <div data-th-if="${#lists.isEmpty(bookList)}">
@@ -44,8 +43,10 @@
                 <button type="submit" class="btn darkblue-btn" style="width: 215px;">Search</button>
                 </div>
             </form>
-            <br><br>
+            <br>
             <hr>
+            <br>
+            
             <h2><strong><img src="/openbook.png" height="40"> Empty Book List</strong></h2>
             <p>Please search for a book</p>
 		</div>
