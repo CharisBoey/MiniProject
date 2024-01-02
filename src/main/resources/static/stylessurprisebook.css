@@ -84,15 +84,11 @@ body {
     text-align: left;
 }
 
-.author{
-    padding:25px 100px;
-}
-
 .description {
     text-align: justify;
     overflow: auto;
     text-overflow: ellipsis;
-    height: 100px;
+    height: 225px;
     scrollbar-width: thin;
     padding:25px 100px;
 }
@@ -111,15 +107,15 @@ body {
 }
 
 .imgbackground {
-height: 235px;
-width: 165px;
+height: 215px;
+width: 145px;
 object-fit: contain; 
 display: flex;
 justify-content: center;
 align-items: center;
 text-align: center;
 background-color: #FFF;
-border: 10px solid #FFF; 
+border: 5px solid #FFF; 
 border-radius: 5px;
 }
 
