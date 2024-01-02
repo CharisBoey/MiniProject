@@ -1,0 +1,154 @@
+body {
+    font-family:Montserrat;
+    margin: 0;
+    padding: 0;
+    color: #1A273E;
+    text-align: center;
+    background-image: url("/background.jpg");
+    background-size: cover;
+}
+
+.topborder {
+    background-color: #D5E3EE;
+    color: #1A273E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+}
+
+.h1 {
+    font-family: "Lobster", sans-serif;
+    margin: 0;
+}
+
+.normalheaders{
+    font-family: Montserrat;
+    color: #1F273A;
+}
+
+.backgroundAPI{
+    background-color: #D5E3EE;
+    width: 900px;
+    height: 600px;
+    border-radius: 20px;
+    display: flex; 
+    margin: 0 auto; 
+}
+
+.background{
+    background-color: #D5E3EE;
+    width: 700px;
+    height: 500px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; 
+}
+
+.darkblue-btn {
+    background-color: #1A273E; 
+    border-color:#1A273E;
+    color: #FFF; 
+    font-family: Montserrat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.mediumblue-btn {
+    background-color: #576484;
+    border-color: #576484; 
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-style: italic;
+}
+
+.mini-btn {
+    background-color: #1A273E; 
+    border-color:#1A273E;
+    color: #FFF; 
+    font-family: Montserrat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.btn:hover {
+    background-color: #FFF; 
+    border-color:#1F273A;
+    color: #1F273A;
+    font-weight: bold;
+}
+
+.styleleft{
+    text-align: left;
+}
+
+.styleforminputright{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+.logo-edit {
+    font-family: "Lobster", sans-serif;
+    font-size:20px;
+}
+
+.justifytext{
+    text-align: justify;
+}
+
+.description {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100px;
+    padding:25px 100px;
+}
+
+/* -------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+        
+
+        
+
+
+        
+
+
+
+
+

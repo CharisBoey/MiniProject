@@ -1,0 +1,220 @@
+body {
+    font-family:Montserrat;
+    margin: 0;
+    padding: 0;
+    color: #1A273E;
+}
+
+.topborder {
+    background-color: #D5E3EE;
+    color: #1A273E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+}
+
+.darkblue-btn {
+    background-color: #1A273E; 
+    border-color:#1A273E;
+    color: #FFF; 
+    font-family: Montserrat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+}
+
+.mini-btn {
+    background-color: #1A273E; 
+    border-color:#1A273E;
+    color: #FFF; 
+    font-family: Montserrat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.mediumblue-btn {
+    background-color: #576484;
+    border-color: #576484; 
+    color: #FFF;
+    font-family: Montserrat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+}
+
+.yellow-btn {
+    background-color: #F1A81A;
+    border-color: #F1A81A; 
+    color: #FFF;
+    font-family:Montserrat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #FFF; 
+    border-color:#1F273A;
+    color: #1F273A;
+    font-weight: bold;
+}
+
+.h1 {
+    font-family: "Lobster", sans-serif;
+    font-weight: bolder;
+    margin: 0;
+}
+
+.normalheaders{
+    font-family: Montserrat;
+    color: #1F273A;
+}
+
+.email {
+    text-align: right;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.tablecentered{
+    text-align: center;
+}
+
+.stylecenter{
+    text-align: center;
+}
+
+.panel-view {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+gap: 20px;
+}
+
+.panel-item {
+border: 1px solid #EDF5FB;
+padding: 15px;
+text-align: center;
+background-color: #EDF5FB;
+}
+
+.panel-item h5 {
+height: 75px; 
+font-family: Montserrat;
+font-weight: bold;
+}
+
+.panel-item img {
+height: 235px; 
+width: 165px;
+object-fit: contain; 
+background-color: #FFF;
+border: 10px solid #FFF; 
+border-radius: 5px;
+}
+
+.title {
+    text-align: center;
+    overflow: auto;
+    text-overflow: ellipsis;
+    height: 110px;
+    scrollbar-width: thin;
+    padding:10px;
+}
+
+.title::-webkit-scrollbar {
+    width: 10px;
+}
+
+.title::-webkit-scrollbar-thumb {
+    background-color: #1A273E; 
+    border-radius: 5px;
+}
+
+.title::-webkit-scrollbar-track {
+    background-color: #D5E3EE; 
+}
+
+.description {
+    text-align: justify;
+    overflow: auto;
+    text-overflow: ellipsis;
+    height: 100px;
+    scrollbar-width: thin;
+    padding:10px
+}
+
+.description::-webkit-scrollbar {
+    width: 10px;
+}
+
+.description::-webkit-scrollbar-thumb {
+    background-color: #1A273E; 
+    border-radius: 5px; 
+}
+
+.description::-webkit-scrollbar-track {
+    background-color: #D5E3EE; 
+}
+
+/* https://www.w3schools.com/howto/howto_js_snackbar.asp */
+#snackbar {
+visibility: hidden; 
+min-width: 250px; 
+margin-left: -125px;
+background-color: #1A273E;
+color: #fff; 
+text-align: center; 
+border-radius: 2px; 
+padding: 16px; 
+position: fixed;
+z-index: 1; 
+left: 50%;
+bottom: 30px; 
+}
+
+#snackbar.show {
+visibility: visible; 
+-webkit-animation: fadein 0.5s, fadeout 0.5s 1.5s;
+animation: fadein 0.5s, fadeout 0.5s 1.5s;
+}
+
+@-webkit-keyframes fadein {
+from {bottom: 0; opacity: 0;}
+to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+from {bottom: 0; opacity: 0;}
+to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+from {bottom: 30px; opacity: 1;}
+to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+from {bottom: 30px; opacity: 1;}
+to {bottom: 0; opacity: 0;}
+}
+
+
+/* -------------- */
+
+
+
+
+
+
+

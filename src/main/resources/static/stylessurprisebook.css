@@ -1,0 +1,176 @@
+body {
+    font-family:Montserrat;
+    margin: 0;
+    padding: 0;
+    color: #1A273E;
+    text-align: center;
+}
+
+.topborder {
+    background-color: #D5E3EE;
+    color: #1A273E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+}
+
+.h1 {
+    font-family: "Lobster", sans-serif;
+    margin: 0;
+}
+
+.normalheaders{
+    font-family: Montserrat;
+    color: #1F273A;
+}
+
+.background{
+    background-color: #D5E3EE;
+    width: 900px;
+    height: 600px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; 
+}
+
+.darkblue-btn {
+    background-color: #1A273E; 
+    border-color:#1A273E;
+    color: #FFF; 
+    font-family: Montserrat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.mini-btn {
+    background-color: #1A273E; 
+    border-color:#1A273E;
+    color: #FFF; 
+    font-family: Montserrat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.mediumblue-btn {
+    background-color: #576484;
+    border-color: #576484; 
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-style: italic;
+}
+
+.btn:hover {
+    background-color: #FFF; 
+    border-color:#1F273A;
+    color: #1F273A;
+    font-weight: bold;
+}
+
+.styleleft{
+    text-align: left;
+}
+
+.description {
+    text-align: justify;
+    overflow: auto;
+    text-overflow: ellipsis;
+    height: 100px;
+    scrollbar-width: thin;
+    padding:25px 100px;
+}
+
+.description::-webkit-scrollbar {
+    width: 10px;
+}
+
+.description::-webkit-scrollbar-thumb {
+    background-color: #1A273E; 
+    border-radius: 5px;
+}
+
+.description::-webkit-scrollbar-track {
+    background-color: #D5E3EE;
+}
+
+.imgbackground {
+height: 235px;
+width: 165px;
+object-fit: contain; 
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+background-color: #FFF;
+border: 10px solid #FFF; 
+border-radius: 5px;
+}
+
+.buttonheader {
+    display: flex;
+}
+
+.alignment{
+    margin-right : 650px;
+}
+
+.email {
+    text-align: right;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+/* https://www.w3schools.com/howto/howto_js_snackbar.asp */
+#snackbar {
+visibility: hidden; 
+min-width: 250px; 
+margin-left: -125px;
+background-color: #1A273E;
+color: #fff; 
+text-align: center; 
+border-radius: 2px; 
+padding: 16px; 
+position: fixed;
+z-index: 1; 
+left: 50%;
+bottom: 30px; 
+}
+
+#snackbar.show {
+visibility: visible; 
+-webkit-animation: fadein 0.5s, fadeout 0.5s 1.5s;
+animation: fadein 0.5s, fadeout 0.5s 1.5s;
+}
+
+@-webkit-keyframes fadein {
+from {bottom: 0; opacity: 0;}
+to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+from {bottom: 0; opacity: 0;}
+to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+from {bottom: 30px; opacity: 1;}
+to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+from {bottom: 30px; opacity: 1;}
+to {bottom: 0; opacity: 0;}
+}
