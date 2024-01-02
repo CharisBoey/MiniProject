@@ -145,6 +145,28 @@ border-radius: 5px;
     background-color: #D5E3EE; 
 }
 
+.author {
+    text-align: center;
+    overflow: auto;
+    text-overflow: ellipsis;
+    height: 55px;
+    scrollbar-width: thin;
+    padding:10px
+}
+
+.author::-webkit-scrollbar {
+    width: 10px;
+}
+
+.author::-webkit-scrollbar-thumb {
+    background-color: #1A273E; 
+    border-radius: 5px; 
+}
+
+.author::-webkit-scrollbar-track {
+    background-color: #D5E3EE; 
+}
+
 .description {
     text-align: justify;
     overflow: auto;
